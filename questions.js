@@ -1,4 +1,4 @@
-// Java Silver SE 11 相当 練習問題 150問
+// Java Silver SE 17 (1Z0-825) 相当 練習問題 175問
 // 章構成:
 // 1章: Javaの基本 (環境・main・パッケージ・import・JVM)
 // 2章: データ型と変数 (プリミティブ・リテラル・演算子・キャスト)
@@ -6,6 +6,7 @@
 // 4章: 配列・文字列・コレクション (String/StringBuilder/配列/ArrayList)
 // 5章: クラスとメソッド (クラス定義・コンストラクタ・static・オーバーロード・カプセル化)
 // 6章: 継承・ポリモーフィズム・例外・ラムダ (extends/implements/abstract/interface/try-catch/lambda)
+// 7章: Java SE 17 新機能 (var/switch式/テキストブロック/record/sealed/pattern matching)
 
 const QUESTIONS = [
   // ==================== 第1章: Javaの基本 (25問) ====================
@@ -1628,5 +1629,332 @@ const QUESTIONS = [
     answer: 0,
     brief: "Throwable直下にErrorとExceptionがあり、Exception直下にRuntimeExceptionがある。",
     detail: "java.lang.Throwableが最上位。その下にError（OutOfMemoryError等、回復不能）とException。Exceptionの下にRuntimeException（非チェック例外: NullPointerException等）とその他（チェック例外: IOException等）。throw できるのはThrowableのサブクラスのみ。"
+  },
+
+  // ==================== 第7章: Java SE 17 新機能 (25問) ====================
+  {
+    id: 151, chapter: 7,
+    question: "次のコードのうちコンパイルエラーになるものはどれか。\n\nvar a = 10;\nvar b = \"hello\";\nvar c = null;\nvar d = new int[]{1,2,3};",
+    choices: [
+      "var a = 10;",
+      "var b = \"hello\";",
+      "var c = null;",
+      "var d = new int[]{1,2,3};"
+    ],
+    answer: 2,
+    brief: "varはnullリテラルだけで型推論できない。",
+    detail: "varは初期化子から型を推論するため、nullだけでは型が決まらずコンパイルエラーになる。明示的な型（Object c = null）が必要。整数リテラルはint、文字列はString、配列初期化子は配列型と推論される。なおvarはローカル変数限定で、フィールド・メソッド引数・戻り値には使えない。"
+  },
+  {
+    id: 152, chapter: 7,
+    question: "varキーワードに関する記述として正しくないものはどれか。",
+    choices: [
+      "ローカル変数の宣言時に初期化子が必要である",
+      "メソッドの引数の型としてvarは使用できない",
+      "インスタンスフィールドの型としてvarが使用できる",
+      "一度推論された後、別の型の値を再代入することはできない"
+    ],
+    answer: 2,
+    brief: "varはローカル変数限定。フィールドでは使えない。",
+    detail: "varはローカル変数の型推論専用で、インスタンスフィールド・静的フィールド・メソッドの引数・戻り値の型には使えない。ローカル変数でも初期化子が必須（var x; はNG）。推論された型は確定するため、var x = 1; の後に x = \"abc\"; とすると型不一致でエラー。"
+  },
+  {
+    id: 153, chapter: 7,
+    question: "次のコードのvar型推論結果として正しいものはどれか。\n\nvar list = new java.util.ArrayList<String>();\nlist.add(\"a\");",
+    choices: [
+      "ArrayList<Object>",
+      "ArrayList<String>",
+      "List<String>",
+      "Object"
+    ],
+    answer: 1,
+    brief: "varはダイヤモンド右辺の完全な型で推論される。",
+    detail: "右辺が new ArrayList<String>() なので、varは ArrayList<String> と推論される（List<String>ではない点に注意）。ダイヤモンド演算子 new ArrayList<>() をvarと組み合わせると ArrayList<Object> と推論されるので、型引数省略と併用するとハマりやすい。"
+  },
+  {
+    id: 154, chapter: 7,
+    question: "次のswitch式の出力として正しいものはどれか。\n\nint day = 3;\nString s = switch (day) {\n  case 1, 2, 3 -> \"weekday-early\";\n  case 4, 5 -> \"weekday-late\";\n  default -> \"weekend\";\n};\nSystem.out.println(s);",
+    choices: [
+      "weekday-early",
+      "weekday-late",
+      "weekend",
+      "コンパイルエラー"
+    ],
+    answer: 0,
+    brief: "アロー記法のswitch式。複数ラベルは case 1, 2, 3 と並べる。",
+    detail: "Java 14で正式採用されたswitch式は case label -> expression; 形式で値を返す。複数ラベルはカンマ区切り。アロー形式はフォールスルーしない（従来のcolonと異なりbreak不要）。値を返す switch 式では全分岐を網羅する必要があり、defaultがないと列挙型でない限りエラーになる。"
+  },
+  {
+    id: 155, chapter: 7,
+    question: "switch式で複数行のブロックから値を返すために使うキーワードはどれか。",
+    choices: [
+      "return",
+      "break",
+      "yield",
+      "continue"
+    ],
+    answer: 2,
+    brief: "switch式のブロックから値を返すのはyield。",
+    detail: "case label -> { ... yield value; } の形でブロック内の計算結果を返すにはyieldを使う。returnは外側のメソッドから戻る意味になってしまうため使えない。break value; の旧構文は廃止された。単一式なら -> value; でOK（yield不要）。"
+  },
+  {
+    id: 156, chapter: 7,
+    question: "次のコードのコンパイル結果として正しいものはどれか。\n\nint n = 5;\nString s = switch (n) {\n  case 1 -> \"one\";\n  case 2 -> \"two\";\n};",
+    choices: [
+      "コンパイル成功、sは未初期化",
+      "コンパイル成功、sはnull",
+      "コンパイルエラー（全ケースを網羅していない）",
+      "実行時例外"
+    ],
+    answer: 2,
+    brief: "値を返すswitch式は全ケース網羅が必須。",
+    detail: "switch式（値を返す形）はコンパイル時に網羅性がチェックされる。int型のような有限でないケースではdefault句が必須。sealed階層やenumでは全ケースを列挙すればdefault省略可能。従来のswitch文（値を返さない）はこの制約を受けない。"
+  },
+  {
+    id: 157, chapter: 7,
+    question: "アロー形式のswitch（case ... -> ...）と従来のcolon形式（case ...:）の違いとして正しいものはどれか。",
+    choices: [
+      "アロー形式は自動でフォールスルーする",
+      "アロー形式はフォールスルーしない",
+      "colon形式はbreak不要",
+      "どちらも同じ動作をする"
+    ],
+    answer: 1,
+    brief: "アロー形式はフォールスルーなし。colon形式はbreakが必要。",
+    detail: "アロー形式（case A -> ...;）は該当ケースのみ実行し、次のcaseへ落ちない。colon形式（case A: ...）はbreakしないと次のcaseまで実行される従来挙動。アロー形式はswitch文・switch式の両方で使用可能。"
+  },
+  {
+    id: 158, chapter: 7,
+    question: "次のテキストブロックが表す文字列として正しいものはどれか。\n\nString s = \"\"\"\n  hello\n  world\n  \"\"\";",
+    choices: [
+      "\"  hello\\n  world\\n  \"",
+      "\"hello\\nworld\\n\"",
+      "\"hello world\"",
+      "\"\\n  hello\\n  world\\n  \""
+    ],
+    answer: 1,
+    brief: "テキストブロックは共通インデントが自動で除去される。",
+    detail: "\"\"\"で囲むテキストブロック（Java 15正式）では、閉じ \"\"\" を含む全行の先頭空白の最小値（incidental whitespace）が除去される。この例では各行と閉じタグが共通して2スペース持つので、結果は「hello\\nworld\\n」。末尾の改行は閉じ \"\"\" の前に改行があるため残る。"
+  },
+  {
+    id: 159, chapter: 7,
+    question: "テキストブロックの記述として正しくないものはどれか。",
+    choices: [
+      "開始の \"\"\" の直後には改行が必要",
+      "行末の空白を保持したいときは \\s を使う",
+      "行を継続して1行にしたいときは行末に \\ を置く",
+      "通常の文字列リテラルと同じく単一行で \"\"\"hello\"\"\" と書ける"
+    ],
+    answer: 3,
+    brief: "テキストブロックは開始 \"\"\" 直後に改行が必須で単一行不可。",
+    detail: "\"\"\"の直後に改行（line terminator）が必要で、\"\"\"hello\"\"\" のように単一行に書くとコンパイルエラー。\\s は行末の空白を保持するエスケープ、行末の \\ は改行を無効化して行継続を意味する。終了の \"\"\" の前に改行がなければ末尾の改行は結果に含まれない。"
+  },
+  {
+    id: 160, chapter: 7,
+    question: "次のrecord宣言で自動生成されないメンバはどれか。\n\nrecord Point(int x, int y) {}",
+    choices: [
+      "コンストラクタ Point(int x, int y)",
+      "アクセッサ x() と y()",
+      "equals / hashCode / toString",
+      "setter setX(int) / setY(int)"
+    ],
+    answer: 3,
+    brief: "recordは不変。setterは生成されない。",
+    detail: "recordは全フィールドをprivate finalとして保持する不変データキャリア。自動生成されるのは①全引数コンストラクタ（canonical constructor）、②各フィールドのアクセッサ（getX()ではなくx()）、③equals/hashCode/toStringの3種。setterは生成されず、フィールドを書き換える手段もない。暗黙的にfinalで継承不可。"
+  },
+  {
+    id: 161, chapter: 7,
+    question: "recordに関する記述として正しいものはどれか。",
+    choices: [
+      "抽象record（abstract record）を定義できる",
+      "他のクラスをextendsできる",
+      "静的メンバー（static フィールド/メソッド）を追加できる",
+      "インスタンスフィールドを追加で宣言できる"
+    ],
+    answer: 2,
+    brief: "recordは静的メンバの追加はOK、インスタンスフィールド追加・継承は不可。",
+    detail: "recordは暗黙的にfinal、暗黙的に java.lang.Record を継承するため他クラスをextendsできない（implementsはOK）。ヘッダのコンポーネント以外のインスタンスフィールドを宣言するとエラー。ただし静的フィールド・静的メソッド・インスタンスメソッド・ネストされた型は追加できる。abstract修飾子も付けられない。"
+  },
+  {
+    id: 162, chapter: 7,
+    question: "次のrecordのコンパクトコンストラクタの記述として正しいものはどれか。\n\nrecord Person(String name, int age) {\n  // ここに記述\n}",
+    choices: [
+      "public Person(String name, int age) { this.name = name; this.age = age; }",
+      "public Person { if (age < 0) throw new IllegalArgumentException(); }",
+      "public Person() { this(\"\", 0); }",
+      "Person { this.name = name.trim(); }"
+    ],
+    answer: 1,
+    brief: "コンパクトコンストラクタは引数リストなしで検証だけ書ける。",
+    detail: "record専用の「コンパクトコンストラクタ」は public RecName { ... } の形で、引数リストを書かない。this.xxx = xxx の代入は暗黙に最後に実行されるため書く必要がなく（むしろ書くと重複）、引数の検証や正規化に使うのが主。Dはコンパクト形式に見えて this.name = name.trim(); のみで有効だが、コンパクトコンストラクタではpublic修飾子が必須（throwsも宣言不可）。"
+  },
+  {
+    id: 163, chapter: 7,
+    question: "次のコードの出力として正しいものはどれか。\n\nrecord Pt(int x, int y) {}\nPt a = new Pt(1, 2);\nPt b = new Pt(1, 2);\nSystem.out.println(a.equals(b));",
+    choices: [
+      "true",
+      "false",
+      "コンパイルエラー",
+      "NullPointerException"
+    ],
+    answer: 0,
+    brief: "recordのequalsは全コンポーネント比較で自動生成される。",
+    detail: "recordは全コンポーネントの値が等しければequalsがtrueを返す実装を自動生成する。hashCodeも全コンポーネントから算出されるので、equals/hashCode契約を満たす。DTOや値オブジェクトにうってつけ。カスタマイズしたければ自分でequals/hashCodeをオーバーライドできるが、契約を壊さないように注意。"
+  },
+  {
+    id: 164, chapter: 7,
+    question: "次のsealedクラスの宣言として正しくないものはどれか。\n\npublic sealed class Shape permits Circle, Square, Triangle {}",
+    choices: [
+      "final class Circle extends Shape {}",
+      "non-sealed class Square extends Shape {}",
+      "sealed class Triangle extends Shape permits RightTriangle {}",
+      "class Rhombus extends Shape {}"
+    ],
+    answer: 3,
+    brief: "sealedのサブクラスは final / sealed / non-sealed のいずれかを必ず指定。",
+    detail: "sealedクラスを継承するサブクラスは必ず final（これ以上継承不可）、sealed（さらに permits で限定継承）、non-sealed（制限を解いて自由に継承可能）のいずれかで宣言する必要がある。また permits に列挙されていないクラスは継承できないため、permitsにRhombusがなければエラー。"
+  },
+  {
+    id: 165, chapter: 7,
+    question: "sealedインターフェースのpermits句を省略できる条件はどれか。",
+    choices: [
+      "サブクラスが別のパッケージにあるとき",
+      "サブクラスがすべて同じソースファイルに記述されているとき",
+      "サブクラスがfinalであるとき",
+      "サブクラスが1つだけのとき"
+    ],
+    answer: 1,
+    brief: "permitsは同一コンパイル単位（同ファイル）なら省略可能。",
+    detail: "sealed型と全サブクラスが同じコンパイル単位（同じ .java ファイル）に書かれている場合、permits句を省略してもコンパイラが自動認識する。別ファイルにある場合はpermitsで明示が必要。named module内なら同一モジュール、unnamed moduleなら同一パッケージに置くことも要件。"
+  },
+  {
+    id: 166, chapter: 7,
+    question: "sealed階層に対するswitch式が default を省略できる理由はどれか。",
+    choices: [
+      "コンパイラがサブクラスを列挙して網羅性を判定できるから",
+      "sealedクラスはnullを返さないから",
+      "switch式は常にdefault省略が可能だから",
+      "sealedクラスは自動的にdefault分岐を生成するから"
+    ],
+    answer: 0,
+    brief: "sealedは許可されたサブクラスが有限なので網羅チェックが可能。",
+    detail: "sealed階層ではpermits句で全サブクラスが列挙されるため、コンパイラがswitch式の網羅性（exhaustiveness）を静的に判定できる。全permitsサブクラスをcaseで拾えばdefault不要。enumと同じ扱い。将来パターンマッチングswitchと組み合わせると威力を発揮する。"
+  },
+  {
+    id: 167, chapter: 7,
+    question: "次のinstanceofパターンマッチングの記述として正しいものはどれか。\n\nObject o = \"hello\";",
+    choices: [
+      "if (o instanceof String) { String s = o; System.out.println(s.length()); }",
+      "if (o instanceof String s) { System.out.println(s.length()); }",
+      "if (o instanceof var s) { System.out.println(s.length()); }",
+      "if (o instanceof String as s) { System.out.println(s.length()); }"
+    ],
+    answer: 1,
+    brief: "if (o instanceof String s) でキャストと変数宣言が同時にできる。",
+    detail: "Java 16で正式採用されたパターンマッチング for instanceofは、型チェックと同時にバインディング変数を宣言できる。instanceof の後ろは Type identifier の形。Aは従来の書き方だが String s = o; はダウンキャスト不可でコンパイルエラー。instanceof にvarは使えない。as キーワードはJavaには存在しない。"
+  },
+  {
+    id: 168, chapter: 7,
+    question: "次のコードの挙動として正しいものはどれか。\n\nObject o = getObject();\nif (o instanceof Integer i && i > 0) {\n  System.out.println(\"positive: \" + i);\n}",
+    choices: [
+      "oがIntegerでなくてもiは定義される",
+      "oがIntegerなら && の右側でiを使える",
+      "&& の右でiはスコープ外",
+      "コンパイルエラー"
+    ],
+    answer: 1,
+    brief: "パターン変数はショートサーキットの && 右側でも使える。",
+    detail: "instanceofパターンで導入された変数（binding variable）は、パターンがtrueになるブランチで有効。&&は左側が成功（true）した場合のみ右側を評価するので、i > 0 の位置でiが使える。|| の場合は逆で、右側はパターンがfalseのときの評価なのでiは使えない。"
+  },
+  {
+    id: 169, chapter: 7,
+    question: "instanceofパターン変数のスコープとして正しいものはどれか。\n\nObject o = 42;\nif (!(o instanceof Integer i)) {\n  return;\n}\nSystem.out.println(i);",
+    choices: [
+      "i は if ブロック内だけで有効",
+      "i は 以降の文でも使える（flow scoping）",
+      "i は メソッド全体で使える",
+      "コンパイルエラー"
+    ],
+    answer: 1,
+    brief: "パターン変数はフロー解析され、以降の到達可能コードで使える。",
+    detail: "instanceofパターン変数のスコープはフロースコーピング（flow scoping）と呼ばれ、コンパイラが「その変数が確実にバインドされている」と判定した範囲で有効。この例では !(o instanceof Integer i) がtrueならreturnなので、return を通過した後はo が Integer 確定 → i が有効になる。通常のローカル変数と異なる特徴。"
+  },
+  {
+    id: 170, chapter: 7,
+    question: "Java SE 17 の特徴として正しいものはどれか。",
+    choices: [
+      "非LTS（短期サポート）リリースである",
+      "LTS（長期サポート）リリースである",
+      "Oracle JDK 17は商用利用で必ず有償",
+      "SE 16の後継だがすぐに SE 18 が LTS になる"
+    ],
+    answer: 1,
+    brief: "Java SE 17 は LTS リリース。",
+    detail: "Java SE 17（2021年9月リリース）はLTS（Long-Term Support）バージョンで、SE 11に続くLTS。次のLTSはSE 21（2023年9月）。Oracle JDK 17はNFTCライセンス下で多くの用途で無償利用可能。Silverの最新は2026年時点で SE 17（1Z0-825）。"
+  },
+  {
+    id: 171, chapter: 7,
+    question: "Java 11以降で追加された、ソースファイルを直接実行する方法として正しいものはどれか。",
+    choices: [
+      "javac Hello.java",
+      "java Hello.java",
+      "javap Hello.java",
+      "jshell Hello.java"
+    ],
+    answer: 1,
+    brief: "Java 11以降は java コマンドで .java を直接実行できる（シングルファイルソースコード実行）。",
+    detail: "Java 11で JEP 330（Launch Single-File Source-Code Programs）が導入され、java Hello.java のように javac を経由せずソースを直接実行できる。内部的には一時的にコンパイル→実行する。スクリプト的用途に便利。jshellはREPLで別機能、javapは逆アセンブラ。"
+  },
+  {
+    id: 172, chapter: 7,
+    question: "次のsealed階層でコンパイルエラーになる行はどれか。\n\nsealed interface Animal permits Dog, Cat {}\nfinal class Dog implements Animal {}\nnon-sealed class Cat implements Animal {}\nclass Puppy extends Dog {}",
+    choices: [
+      "sealed interface Animal permits Dog, Cat {}",
+      "final class Dog implements Animal {}",
+      "non-sealed class Cat implements Animal {}",
+      "class Puppy extends Dog {}"
+    ],
+    answer: 3,
+    brief: "final指定されたDogはこれ以上継承できない。",
+    detail: "Dogがfinalなので Puppy extends Dog はコンパイルエラー。sealedの子は final/sealed/non-sealed のいずれかを必ず宣言する。non-sealedを宣言したCatは通常クラスと同じく自由に継承可能。sealedチェーンは permits で継承を制限しつつ、末端をfinalで固定するのが典型パターン。"
+  },
+  {
+    id: 173, chapter: 7,
+    question: "次のコードで正しく動作する記述はどれか。\n\nrecord Range(int from, int to) {\n  public Range {\n    // ここ\n  }\n}",
+    choices: [
+      "if (from > to) throw new IllegalArgumentException();",
+      "this.from = Math.max(0, from); this.to = to;",
+      "this(0, 0);",
+      "return;"
+    ],
+    answer: 0,
+    brief: "コンパクトコンストラクタでは引数検証と正規化（引数への再代入）ができる。",
+    detail: "コンパクトコンストラクタでは引数（パラメータ）に再代入することで正規化ができる（例: from = Math.max(0, from);）。ただし this.xxx への直接代入は不可（代入は暗黙に最後に行われるため）。検証（throw）は典型用途。thisで別コンストラクタを呼び出すのはコンパクト形式では不可、returnも値を返せないので不要。"
+  },
+  {
+    id: 174, chapter: 7,
+    question: "次のswitch式のうちコンパイルエラーになるものはどれか。\n\nint n = 5;",
+    choices: [
+      "int r = switch (n) { case 1 -> 10; case 2 -> 20; default -> 0; };",
+      "String s = switch (n) { case 1, 2 -> \"low\"; case 3, 4 -> \"mid\"; default -> \"high\"; };",
+      "int r = switch (n) { case 1 -> { yield 10; } default -> { yield 0; } };",
+      "int r = switch (n) { case 1 -> 10; default -> { return 0; } };"
+    ],
+    answer: 3,
+    brief: "switch式のブロックから値を返すのはyield。returnはNG。",
+    detail: "switch式のブロックでは return は外側のメソッドからの戻りを意味するためswitch式の値にならず、ブロックが値を生成しない → 文法エラー。値を返すには yield を使う。単一式（->の右が式1つ）なら yield は不要。"
+  },
+  {
+    id: 175, chapter: 7,
+    question: "次のコードの出力として正しいものはどれか。\n\nsealed interface Shape permits Circle, Square {}\nrecord Circle(double r) implements Shape {}\nrecord Square(double side) implements Shape {}\n\nShape s = new Circle(2.0);\ndouble area = switch (s) {\n  case Circle c -> Math.PI * c.r() * c.r();\n  case Square sq -> sq.side() * sq.side();\n};\nSystem.out.printf(\"%.2f%n\", area);",
+    choices: [
+      "4.00",
+      "12.57",
+      "コンパイルエラー",
+      "実行時例外"
+    ],
+    answer: 1,
+    brief: "sealed+recordのパターンswitch式は網羅性が取れればdefault不要。",
+    detail: "sealed interface ShapeはCircle/Squareのみ許可されるため、両方のcaseを書けば網羅しdefault省略可能。r=2.0なのでπ × 4 ≒ 12.57。Java 21でパターンマッチング for switchが正式化されたが、Java 17ではプレビュー機能扱い。Silver SE 17（1Z0-825）では基礎的なsealed + switch式の知識が問われる。"
   }
 ];
