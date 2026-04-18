@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Silver 練習問題</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --border: #e5e7eb;
+    --text: #1f2937;
+    --text-sub: #6b7280;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --star: #facc15;
+    --radius: 10px;
+    --shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  #chapter-indicator {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-sub);
+    padding: 4px 12px;
+    background: var(--bg);
+    border-radius: 20px;
+  }
+  #timer-display {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-left: 12px;
+  }
+  #timer-display.warning { color: var(--warning); }
+  #timer-display.danger { color: var(--danger); }
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+  }
+  h2 {
+    margin: 0 0 16px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-sub);
+  }
+  button {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--primary);
+    color: white;
+    font-family: inherit;
+  }
+  button:hover { background: var(--primary-hover); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button.secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  button.secondary:hover { background: var(--bg); }
+  button.ghost {
+    background: transparent;
+    color: var(--primary);
+    padding: 8px 12px;
+  }
+  button.ghost:hover { background: var(--bg); }
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .option-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .option-btn {
+    padding: 20px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .option-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .option-btn .desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-sub);
+    margin-top: 4px;
+  }
+  .option-btn:hover .desc { color: var(--primary); }
+  select, input[type="number"] {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--surface);
+  }
+  .question-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .question-text code,
+  pre.code-block {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+  }
+  pre.code-block {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 12px 0;
+    line-height: 1.5;
+  }
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .choice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--surface);
+  }
+  .choice:hover:not(.disabled) {
+    border-color: var(--primary);
+    background: #f0f7ff;
+  }
+  .choice.selected {
+    border-color: var(--primary);
+    background: #eff6ff;
+  }
+  .choice.correct {
+    border-color: var(--success);
+    background: #ecfdf5;
+  }
+  .choice.incorrect {
+    border-color: var(--danger);
+    background: #fef2f2;
+  }
+  .choice.disabled { cursor: default; }
+  .choice-label {
+    font-weight: 600;
+    color: var(--text-sub);
+    min-width: 24px;
+  }
+  .choice.correct .choice-label { color: var(--success); }
+  .choice.incorrect .choice-label { color: var(--danger); }
+  .choice-text {
+    flex: 1;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s;
+  }
+  .explanation {
+    margin-top: 20px;
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+  }
+  .explanation.correct { border-left-color: var(--success); }
+  .explanation.incorrect { border-left-color: var(--danger); }
+  .explanation h4 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .result-judge {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .result-judge.correct { color: var(--success); }
+  .result-judge.incorrect { color: var(--danger); }
+  .detail-toggle {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--primary);
+    cursor: pointer;
+    user-select: none;
+    font-weight: 500;
+  }
+  .detail-toggle:hover { text-decoration: underline; }
+  .detail-content {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: none;
+    font-size: 14px;
+    color: var(--text-sub);
+  }
+  .detail-content.show { display: block; }
+  .star-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px 8px;
+    color: var(--border);
+    transition: color 0.15s;
+  }
+  .star-btn.active { color: var(--star); }
+  .star-btn:hover { color: var(--star); }
+  .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .question-number {
+    font-size: 14px;
+    color: var(--text-sub);
+    font-weight: 500;
+  }
+  .result-score {
+    text-align: center;
+    padding: 24px 0;
+  }
+  .result-score .big {
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .result-score .unit {
+    font-size: 20px;
+    color: var(--text-sub);
+  }
+  .result-score .detail {
+    margin-top: 8px;
+    color: var(--text-sub);
+  }
+  .chapter-result {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .chapter-result:last-child { border-bottom: none; }
+  .chapter-result .chapter-name { font-weight: 500; }
+  .chapter-result .rate {
+    color: var(--text-sub);
+    font-weight: 500;
+  }
+  .rate.high { color: var(--success); }
+  .rate.mid { color: var(--warning); }
+  .rate.low { color: var(--danger); }
+  .settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .settings-row:last-child { border-bottom: none; }
+  .settings-row label { font-weight: 500; }
+  .switch {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .switch.on { background: var(--primary); }
+  .switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+  .switch.on::after { transform: translateX(20px); }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    background: var(--bg);
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-bottom: 4px;
+  }
+  .stat-card .value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Java Silver 練習問題</h1>
+  <div>
+    <span id="chapter-indicator">-</span>
+    <span id="timer-display" style="display:none;"></span>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<script src="questions.js"></script>
+<script>
+(() => {
+  'use strict';
+
+  const CHAPTER_NAMES = {
+    1: '第1章 Javaの基本',
+    2: '第2章 データ型と変数',
+    3: '第3章 制御構造',
+    4: '第4章 配列・文字列・コレクション',
+    5: '第5章 クラスとメソッド',
+    6: '第6章 継承・ポリモーフィズム・例外・ラムダ'
+  };
+
+  const TIMER_SECONDS = 90;
+  const STORAGE_KEY = 'java-silver-state-v1';
+
+  // localStorage 状態: 苦手マーク・直近ミス・累計統計
+  const state = loadState();
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (_) {}
+    return {
+      starred: [],
+      lastIncorrect: [],
+      totalAnswered: 0,
+      totalCorrect: 0,
+      timerEnabled: true
+    };
+  }
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  // セッション中の一時データ
+  let session = null;
+  let timerId = null;
+
+  const app = document.getElementById('app');
+  const chapterIndicator = document.getElementById('chapter-indicator');
+  const timerDisplay = document.getElementById('timer-display');
+
+  function setChapterIndicator(text) {
+    chapterIndicator.textContent = text || '-';
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // 問題文やコードを表示用にフォーマット（改行・コードブロック分離）
+  function formatQuestion(text) {
+    const lines = text.split('\n');
+    const buf = [];
+    let codeBuf = [];
+    let inCode = false;
+
+    const flushCode = () => {
+      if (codeBuf.length) {
+        buf.push(`<pre class="code-block">${escapeHtml(codeBuf.join('\n'))}</pre>`);
+        codeBuf = [];
+      }
+    };
+
+    for (const line of lines) {
+      const isCodeLine = /[{}();]|^\s{2,}|\bpublic\b|\bprivate\b|\bclass\b|\bstatic\b|\bvoid\b|\bint\b|System\.out|\bfor\b|\bwhile\b|\bif\b|\belse\b|\breturn\b|\bnew\b|\btry\b|\bcatch\b|\bfinally\b|\bthrow\b/.test(line);
+      if (isCodeLine) {
+        if (!inCode) inCode = true;
+        codeBuf.push(line);
+      } else {
+        flushCode();
+        inCode = false;
+        if (line.trim()) buf.push(`<p style="margin:0 0 8px;">${escapeHtml(line)}</p>`);
+      }
+    }
+    flushCode();
+    return buf.join('');
+  }
+
+  function render(html) {
+    app.innerHTML = html;
+  }
+
+  function stopTimer() {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+    timerDisplay.style.display = 'none';
+  }
+
+  function startTimer(onTimeout) {
+    stopTimer();
+    if (!state.timerEnabled) return;
+    let remaining = TIMER_SECONDS;
+    timerDisplay.style.display = 'inline';
+    timerDisplay.className = '';
+    timerDisplay.textContent = `⏱ ${remaining}s`;
+    timerId = setInterval(() => {
+      remaining--;
+      timerDisplay.textContent = `⏱ ${remaining}s`;
+      if (remaining <= 10) timerDisplay.className = 'danger';
+      else if (remaining <= 30) timerDisplay.className = 'warning';
+      if (remaining <= 0) {
+        stopTimer();
+        onTimeout();
+      }
+    }, 1000);
+  }
+
+  // ========== ホーム画面 ==========
+  function renderHome() {
+    stopTimer();
+    setChapterIndicator('ホーム');
+    const accuracy = state.totalAnswered > 0
+      ? Math.round((state.totalCorrect / state.totalAnswered) * 100)
+      : 0;
+    const starredCount = state.starred.length;
+    const lastIncorrectCount = state.lastIncorrect.length;
+
+    render(`
+      <div class="card">
+        <h2>スタート</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="label">累計正答率</div>
+            <div class="value">${accuracy}%</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">累計回答数</div>
+            <div class="value">${state.totalAnswered}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">★ 苦手マーク</div>
+            <div class="value">${starredCount}</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">直近の誤答</div>
+            <div class="value">${lastIncorrectCount}</div>
+          </div>
+        </div>
+
+        <h3>問題数を選択</h3>
+        <div class="option-grid">
+          <button class="option-btn" data-count="5">5問<div class="desc">軽く確認</div></button>
+          <button class="option-btn" data-count="10">10問<div class="desc">標準</div></button>
+          <button class="option-btn" data-count="20">20問<div class="desc">しっかり</div></button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>出題範囲</h3>
+        <div class="btn-group" style="margin-bottom:12px;">
+          <select id="chapter-select">
+            <option value="all">全章（1〜6章ランダム）</option>
+            ${[1,2,3,4,5,6].map(c => `<option value="${c}">${CHAPTER_NAMES[c]}</option>`).join('')}
+          </select>
+        </div>
+        <div class="btn-group">
+          <button class="secondary" id="btn-review" ${lastIncorrectCount === 0 ? 'disabled' : ''}>直近のミスを復習（${lastIncorrectCount}問）</button>
+          <button class="secondary" id="btn-starred" ${starredCount === 0 ? 'disabled' : ''}>★ 苦手のみ出題（${starredCount}問）</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>設定</h3>
+        <div class="settings-row">
+          <label>制限時間（1問90秒）</label>
+          <div class="switch ${state.timerEnabled ? 'on' : ''}" id="switch-timer"></div>
+        </div>
+        <div class="settings-row">
+          <label>進捗データ</label>
+          <button class="ghost" id="btn-reset">リセット</button>
+        </div>
+      </div>
+    `);
+
+    // 問題数ボタン → 章セレクトの値と組み合わせてstart
+    app.querySelectorAll('[data-count]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const count = parseInt(btn.dataset.count, 10);
+        const chapterSel = document.getElementById('chapter-select').value;
+        startQuiz({ count, chapter: chapterSel, mode: 'normal' });
+      });
+    });
+
+    document.getElementById('btn-review').addEventListener('click', () => {
+      startQuiz({ mode: 'review' });
+    });
+    document.getElementById('btn-starred').addEventListener('click', () => {
+      startQuiz({ mode: 'starred' });
+    });
+    document.getElementById('switch-timer').addEventListener('click', () => {
+      state.timerEnabled = !state.timerEnabled;
+      saveState();
+      renderHome();
+    });
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      if (confirm('進捗データ（累計・苦手マーク・誤答履歴）をリセットしますか？')) {
+        localStorage.removeItem(STORAGE_KEY);
+        Object.assign(state, {
+          starred: [], lastIncorrect: [],
+          totalAnswered: 0, totalCorrect: 0, timerEnabled: true
+        });
+        renderHome();
+      }
+    });
+  }
+
+  // ========== 出題開始 ==========
+  function startQuiz({ count, chapter, mode }) {
+    let pool;
+    if (mode === 'review') {
+      pool = QUESTIONS.filter(q => state.lastIncorrect.includes(q.id));
+    } else if (mode === 'starred') {
+      pool = QUESTIONS.filter(q => state.starred.includes(q.id));
+    } else {
+      if (chapter === 'all') {
+        pool = QUESTIONS.slice();
+      } else {
+        const c = parseInt(chapter, 10);
+        pool = QUESTIONS.filter(q => q.chapter === c);
+      }
+    }
+
+    if (pool.length === 0) {
+      alert('出題可能な問題がありません。');
+      return;
+    }
+
+    const picked = shuffle(pool).slice(0, count || pool.length);
+
+    // 各問題の選択肢をランダム化（正解位置も変える）
+    const questions = picked.map(q => {
+      const idxs = shuffle(q.choices.map((_, i) => i));
+      const shuffledChoices = idxs.map(i => q.choices[i]);
+      const newAnswer = idxs.indexOf(q.answer);
+      return { ...q, choices: shuffledChoices, answer: newAnswer };
+    });
+
+    session = {
+      questions,
+      index: 0,
+      answers: [],
+      newlyIncorrect: []
+    };
+    renderQuestion();
+  }
+
+  // ========== 問題画面 ==========
+  function renderQuestion() {
+    const q = session.questions[session.index];
+    const isStarred = state.starred.includes(q.id);
+    setChapterIndicator(CHAPTER_NAMES[q.chapter]);
+
+    render(`
+      <div class="card">
+        <div class="question-header">
+          <span class="question-number">問題 ${session.index + 1} / ${session.questions.length}</span>
+          <button class="star-btn ${isStarred ? 'active' : ''}" id="btn-star" title="苦手マーク">★</button>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${(session.index / session.questions.length) * 100}%;"></div>
+        </div>
+        <div class="question-text">${formatQuestion(q.question)}</div>
+        <div class="choices" id="choices">
+          ${q.choices.map((c, i) => `
+            <div class="choice" data-index="${i}">
+              <span class="choice-label">${String.fromCharCode(65 + i)}</span>
+              <span class="choice-text">${escapeHtml(c)}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div id="explanation-area"></div>
+        <div class="btn-group" id="bottom-btn" style="justify-content:flex-end;">
+          <button class="secondary" id="btn-quit">中断して戻る</button>
+        </div>
+      </div>
+    `);
+
+    document.getElementById('btn-star').addEventListener('click', () => {
+      toggleStar(q.id);
+      renderQuestion();
+    });
+    document.getElementById('btn-quit').addEventListener('click', () => {
+      if (confirm('セッションを中断してホームへ戻りますか？（ここまでの回答は記録されません）')) {
+        session = null;
+        renderHome();
+      }
+    });
+    document.querySelectorAll('#choices .choice').forEach(el => {
+      el.addEventListener('click', () => selectAnswer(parseInt(el.dataset.index, 10)));
+    });
+
+    startTimer(() => selectAnswer(-1)); // タイムアウト時は -1 を不正解扱い
+  }
+
+  function toggleStar(id) {
+    const i = state.starred.indexOf(id);
+    if (i >= 0) state.starred.splice(i, 1);
+    else state.starred.push(id);
+    saveState();
+  }
+
+  function selectAnswer(chosen) {
+    stopTimer();
+    const q = session.questions[session.index];
+    const correct = chosen === q.answer;
+    session.answers.push({ id: q.id, chapter: q.chapter, chosen, correct });
+    if (!correct) session.newlyIncorrect.push(q.id);
+
+    state.totalAnswered++;
+    if (correct) state.totalCorrect++;
+    saveState();
+
+    // 選択肢をロックして正誤表示
+    document.querySelectorAll('#choices .choice').forEach(el => {
+      const i = parseInt(el.dataset.index, 10);
+      el.classList.add('disabled');
+      el.replaceWith(el.cloneNode(true)); // リスナー削除
+    });
+    // 表示を再取得して色付け
+    const choiceEls = document.querySelectorAll('#choices .choice');
+    choiceEls.forEach(el => {
+      const i = parseInt(el.dataset.index, 10);
+      if (i === q.answer) el.classList.add('correct');
+      if (i === chosen && !correct) el.classList.add('incorrect');
+    });
+
+    const judgeText = chosen === -1
+      ? '<span class="result-judge incorrect">⏱ 時間切れ</span>'
+      : correct
+        ? '<span class="result-judge correct">✓ 正解</span>'
+        : '<span class="result-judge incorrect">✗ 不正解</span>';
+
+    const expArea = document.getElementById('explanation-area');
+    expArea.innerHTML = `
+      <div class="explanation ${correct ? 'correct' : 'incorrect'}">
+        ${judgeText}
+        <h4>ざっくり解説</h4>
+        <div>${escapeHtml(q.brief)}</div>
+        <div class="detail-toggle" id="detail-toggle">▼ 詳しく解説を見る</div>
+        <div class="detail-content" id="detail-content">${escapeHtml(q.detail)}</div>
+      </div>
+    `;
+    document.getElementById('detail-toggle').addEventListener('click', () => {
+      const dc = document.getElementById('detail-content');
+      const dt = document.getElementById('detail-toggle');
+      dc.classList.toggle('show');
+      dt.textContent = dc.classList.contains('show') ? '▲ 詳しく解説を閉じる' : '▼ 詳しく解説を見る';
+    });
+
+    const bottomBtn = document.getElementById('bottom-btn');
+    const isLast = session.index === session.questions.length - 1;
+    bottomBtn.innerHTML = `
+      <button class="secondary" id="btn-quit-2">中断</button>
+      <button id="btn-next">${isLast ? '結果を見る' : '次の問題へ'}</button>
+    `;
+    document.getElementById('btn-quit-2').addEventListener('click', () => {
+      if (confirm('セッションを中断してホームへ戻りますか？')) {
+        session = null;
+        renderHome();
+      }
+    });
+    document.getElementById('btn-next').addEventListener('click', () => {
+      if (isLast) renderResult();
+      else {
+        session.index++;
+        renderQuestion();
+      }
+    });
+  }
+
+  // ========== 結果画面 ==========
+  function renderResult() {
+    stopTimer();
+    setChapterIndicator('結果');
+    // 直近のミスを更新
+    state.lastIncorrect = session.newlyIncorrect.slice();
+    saveState();
+
+    const total = session.answers.length;
+    const correct = session.answers.filter(a => a.correct).length;
+    const rate = Math.round((correct / total) * 100);
+
+    // 章別集計
+    const byChapter = {};
+    session.answers.forEach(a => {
+      if (!byChapter[a.chapter]) byChapter[a.chapter] = { total: 0, correct: 0 };
+      byChapter[a.chapter].total++;
+      if (a.correct) byChapter[a.chapter].correct++;
+    });
+
+    const chapterHtml = Object.keys(byChapter)
+      .sort((a, b) => parseInt(a) - parseInt(b))
+      .map(c => {
+        const { total: t, correct: cc } = byChapter[c];
+        const r = Math.round((cc / t) * 100);
+        const cls = r >= 80 ? 'high' : r >= 50 ? 'mid' : 'low';
+        return `
+          <div class="chapter-result">
+            <span class="chapter-name">${CHAPTER_NAMES[c]}</span>
+            <span class="rate ${cls}">${cc}/${t} (${r}%)</span>
+          </div>
+        `;
+      }).join('');
+
+    render(`
+      <div class="card">
+        <h2>結果</h2>
+        <div class="result-score">
+          <div>
+            <span class="big">${rate}</span><span class="unit">%</span>
+          </div>
+          <div class="detail">${correct} / ${total} 問正解</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>章別正答率</h3>
+        ${chapterHtml}
+      </div>
+
+      <div class="card">
+        <div class="btn-group">
+          <button id="btn-home">ホームへ戻る</button>
+          ${session.newlyIncorrect.length > 0
+            ? '<button class="secondary" id="btn-retry-wrong">間違えた問題だけ再挑戦</button>'
+            : ''}
+        </div>
+      </div>
+    `);
+
+    document.getElementById('btn-home').addEventListener('click', renderHome);
+    const retryBtn = document.getElementById('btn-retry-wrong');
+    if (retryBtn) {
+      retryBtn.addEventListener('click', () => startQuiz({ mode: 'review' }));
+    }
+  }
+
+  // 初期表示
+  renderHome();
+})();
+</script>
+</body>
+</html>

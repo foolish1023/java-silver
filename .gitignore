@@ -1,0 +1,10 @@
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.log
+node_modules/
+
+# ローカル保持のみ（Git管理外）
+java-silver.html
