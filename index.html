@@ -42,6 +42,20 @@
     --danger-softer: #FEF2F2;
     --star: #F59E0B;
 
+    /* 章カラー（7章 × ブランドパレット + 補色） */
+    --c1: #008CCF;  --c1-soft: #E0F2FE;  /* 基本 — b→dashブルー */
+    --c2: #7A00DF;  --c2-soft: #EDE9FE;  /* データ型 — KPIeeパープル */
+    --c3: #059669;  --c3-soft: #D1FAE5;  /* 制御構造 — グリーン */
+    --c4: #D97706;  --c4-soft: #FED7AA;  /* 配列・文字列 — アンバー */
+    --c5: #DB2777;  --c5-soft: #FCE7F3;  /* クラス — ピンク */
+    --c6: #0891B2;  --c6-soft: #CFFAFE;  /* 継承 — シアン */
+    --c7: #4F46E5;  --c7-soft: #E0E7FF;  /* SE17新機能 — インディゴ */
+
+    /* ブランドグラデーション */
+    --grad-brand: linear-gradient(90deg, #008CCF, #9DA0D5, #FF7979);
+    --grad-hero: linear-gradient(145deg, #0CAAEB, #36C1FA, #7CD5FD);
+    --grad-blue: linear-gradient(135deg, #008CCF, #0CAAEB);
+
     --radius-xl: 16px;
     --radius-lg: 12px;
     --radius: 10px;
@@ -178,6 +192,14 @@
     color: var(--text);
     line-height: 1.2;
   }
+  .page-title h1.hero {
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 34px;
+    font-weight: 800;
+  }
   .page-title p {
     margin: 0;
     font-size: 15px;
@@ -239,6 +261,14 @@
     line-height: 1.1;
   }
   .stat .value.accent { color: var(--accent); }
+  .stat .value.gradient {
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat .value.star { color: var(--star); }
+  .stat .value.danger { color: var(--danger); }
   .stat .unit {
     font-size: 13px;
     color: var(--text-sub);
@@ -318,31 +348,35 @@
   }
   .pill:hover { border-color: var(--text); color: var(--text); }
   .pill.active {
-    background: var(--primary);
-    border-color: var(--primary);
+    background: var(--accent);
+    border-color: var(--accent);
     color: white;
     font-weight: 600;
+    box-shadow: 0 2px 6px -2px rgba(0, 140, 207, 0.45);
   }
 
   /* ===== ボタン ===== */
   button {
-    border: 1px solid var(--primary);
+    border: 1px solid var(--accent);
     padding: 10px 18px;
     border-radius: 8px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.15s var(--ease);
-    background: var(--primary);
+    background: var(--accent);
     color: white;
     font-family: inherit;
     letter-spacing: 0;
     line-height: 1.4;
     text-transform: none;
+    box-shadow: 0 2px 6px -2px rgba(0, 140, 207, 0.4);
   }
   button:hover:not(:disabled) {
-    background: var(--primary-hover);
-    border-color: var(--primary-hover);
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    box-shadow: 0 4px 10px -2px rgba(0, 140, 207, 0.5);
+    transform: translateY(-1px);
   }
   button:active:not(:disabled) { transform: translateY(1px); }
   button:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -406,7 +440,7 @@
   }
   .progress-fill {
     height: 100%;
-    background: var(--text);
+    background: var(--grad-brand);
     transition: width 0.5s var(--ease);
     border-radius: 999px;
   }
@@ -827,14 +861,25 @@
     box-shadow: var(--shadow-md);
   }
   .mode-card.learn {
-    background: var(--primary);
-    border-color: var(--primary);
+    background: var(--grad-hero);
+    border-color: transparent;
     color: white;
+    box-shadow: 0 10px 20px -8px rgba(0, 140, 207, 0.45);
   }
   .mode-card.learn:hover {
-    background: var(--primary-hover);
-    border-color: var(--primary-hover);
+    background: linear-gradient(145deg, #016CA3, #0CAAEB, #36C1FA);
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px -8px rgba(0, 140, 207, 0.55);
   }
+  .mode-card.quiz {
+    border-color: var(--border);
+  }
+  .mode-card.quiz:hover {
+    border-color: var(--accent);
+    background: var(--accent-softer);
+  }
+  .mode-card.quiz .mode-icon { color: var(--accent); }
   .mode-icon {
     width: 22px;
     height: 22px;
@@ -914,17 +959,27 @@
     display: grid;
     place-items: center;
     font-family: var(--font-heading);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 15px;
-    color: var(--text-2);
-    background: var(--surface-2);
-    border: 1px solid var(--border);
+    color: #fff;
+    background: var(--chip-color, var(--accent));
     letter-spacing: 0;
+    box-shadow: 0 2px 6px -2px rgba(0,0,0,0.18);
   }
-  .chapter-card:hover .chip {
-    background: var(--text);
-    color: white;
-    border-color: var(--text);
+  .chapter-card[data-ch="1"] { --chip-color: var(--c1); --chip-soft: var(--c1-soft); }
+  .chapter-card[data-ch="2"] { --chip-color: var(--c2); --chip-soft: var(--c2-soft); }
+  .chapter-card[data-ch="3"] { --chip-color: var(--c3); --chip-soft: var(--c3-soft); }
+  .chapter-card[data-ch="4"] { --chip-color: var(--c4); --chip-soft: var(--c4-soft); }
+  .chapter-card[data-ch="5"] { --chip-color: var(--c5); --chip-soft: var(--c5-soft); }
+  .chapter-card[data-ch="6"] { --chip-color: var(--c6); --chip-soft: var(--c6-soft); }
+  .chapter-card[data-ch="7"] { --chip-color: var(--c7); --chip-soft: var(--c7-soft); }
+  .chapter-card:hover:not(:disabled) {
+    border-color: var(--chip-color, var(--accent));
+    background: var(--chip-soft, var(--accent-softer));
+  }
+  .chapter-card:hover .arrow { color: var(--chip-color); }
+  .chapter-card .mini-bar-fill {
+    background: var(--chip-color, var(--accent)) !important;
   }
   .chapter-card .body {
     flex: 1;
@@ -978,6 +1033,7 @@
     padding: 18px 20px;
     border-radius: var(--radius);
     border: 1px solid var(--border);
+    border-left: 3px solid var(--chip-color, var(--accent));
     background: var(--surface);
     transition: all 0.15s var(--ease);
     font-family: inherit;
@@ -990,29 +1046,38 @@
     align-items: flex-start;
     gap: 14px;
   }
+  .topic-card[data-ch="1"] { --chip-color: var(--c1); --chip-soft: var(--c1-soft); }
+  .topic-card[data-ch="2"] { --chip-color: var(--c2); --chip-soft: var(--c2-soft); }
+  .topic-card[data-ch="3"] { --chip-color: var(--c3); --chip-soft: var(--c3-soft); }
+  .topic-card[data-ch="4"] { --chip-color: var(--c4); --chip-soft: var(--c4-soft); }
+  .topic-card[data-ch="5"] { --chip-color: var(--c5); --chip-soft: var(--c5-soft); }
+  .topic-card[data-ch="6"] { --chip-color: var(--c6); --chip-soft: var(--c6-soft); }
+  .topic-card[data-ch="7"] { --chip-color: var(--c7); --chip-soft: var(--c7-soft); }
   .topic-card:hover:not(:disabled) {
-    background: var(--surface);
-    border-color: var(--text-2);
+    background: var(--chip-soft, var(--accent-softer));
+    border-color: var(--chip-color, var(--accent));
+    border-left-color: var(--chip-color, var(--accent));
     box-shadow: var(--shadow-sm);
     transform: translateY(-1px);
   }
   .topic-card:hover:not(:disabled) .num {
-    background: var(--accent-softer);
-    color: var(--accent);
+    background: var(--chip-color, var(--accent));
+    color: white;
   }
   .topic-card .num {
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
-    background: var(--surface-2);
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: var(--chip-soft, var(--surface-2));
     display: grid;
     place-items: center;
     font-family: var(--font-heading);
-    font-weight: 500;
+    font-weight: 700;
     font-size: 12px;
-    color: var(--text-sub);
+    color: var(--chip-color, var(--text-sub));
     margin-top: 1px;
+    transition: all 0.15s var(--ease);
   }
   .topic-card .body { flex: 1; min-width: 0; }
   .topic-card .title {
@@ -1386,7 +1451,7 @@
 
     render(`
       <div class="page-title">
-        <h1>Java Silverを学ぶ</h1>
+        <h1 class="hero">Java Silverを学ぶ</h1>
         <p>Java Silver SE 17（1Z0-825）対策 · 教科書40トピック + 練習問題175問</p>
       </div>
 
@@ -1410,7 +1475,7 @@
         <div class="stats-grid">
           <div class="stat">
             <div class="label">累計正答率</div>
-            <div class="value accent">${accuracy}<span class="unit">%</span></div>
+            <div class="value gradient">${accuracy}<span class="unit">%</span></div>
           </div>
           <div class="stat">
             <div class="label">累計回答</div>
@@ -1418,11 +1483,11 @@
           </div>
           <div class="stat">
             <div class="label">苦手マーク</div>
-            <div class="value">${starredCount}</div>
+            <div class="value star">${starredCount}</div>
           </div>
           <div class="stat">
             <div class="label">直近の誤答</div>
-            <div class="value">${lastIncorrectCount}</div>
+            <div class="value danger">${lastIncorrectCount}</div>
           </div>
         </div>
       </section>
@@ -1573,7 +1638,7 @@
     const topicHtml = topics.map((t, i) => {
       const done = state.learnedTopics.includes(t.id);
       return `
-      <button class="topic-card ${done ? 'done' : ''}" data-id="${t.id}">
+      <button class="topic-card ${done ? 'done' : ''}" data-id="${t.id}" data-ch="${chapter}">
         <div class="num">${done ? '✓' : (i + 1)}</div>
         <div class="body">
           <div class="title">${escapeHtml(t.title)}</div>
