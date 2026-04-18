@@ -6,50 +6,61 @@
 <title>Java Silver — Practice</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #FAFBFC;
+    --bg: #F3F6FB;
     --surface: #FFFFFF;
     --surface-2: #F5F7FA;
-    --border: #E9ECEF;
+    --border: #E6E9EF;
     --border-strong: #D0D5DB;
 
-    --text: #0F172A;
-    --text-2: #334155;
-    --text-sub: #64748B;
-    --text-weak: #94A3B8;
+    --text: #414143;
+    --text-2: #4E4E50;
+    --text-sub: #5B5B5F;
+    --text-weak: #86878A;
 
     --primary: #008CCF;
-    --primary-hover: #0077B3;
+    --primary-hover: #016CA3;
     --primary-dark: #016CA3;
+    --primary-light: #0CAAEB;
     --primary-soft: #E6F4FB;
     --primary-softer: #F3FAFE;
+    --secondary: #1565C0;
+    --accent: #FFC107;
+    --accent-soft: #FFF8E1;
 
-    --success: #10B981;
+    --success: #22C55E;
     --success-bg: #ECFDF5;
     --success-border: #A7F3D0;
-    --danger: #EF4444;
+    --danger: #EF5350;
     --danger-bg: #FEF2F2;
     --danger-border: #FCA5A5;
-    --warning: #F59E0B;
-    --warning-bg: #FFFBEB;
-    --warning-border: #FCD34D;
-    --star: #F59E0B;
+    --warning: #FFCA28;
+    --warning-bg: #FFF8E1;
+    --warning-border: #FFE082;
+    --star: #FFC107;
 
     --radius-xl: 16px;
     --radius-lg: 12px;
     --radius: 8px;
     --radius-sm: 6px;
 
-    --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
-    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.03);
-    --shadow-md: 0 4px 8px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-    --shadow-lg: 0 12px 24px -6px rgba(15, 23, 42, 0.10), 0 4px 8px -4px rgba(15, 23, 42, 0.05);
-    --shadow-primary: 0 8px 20px -6px rgba(0, 140, 207, 0.28);
+    --shadow-xs: 0 1px 2px rgba(65, 65, 67, 0.04);
+    --shadow-sm: 0 2px 8px rgba(65, 65, 67, 0.06);
+    --shadow-md: 0 4px 16px rgba(65, 65, 67, 0.08);
+    --shadow-lg: 0 8px 24px rgba(65, 65, 67, 0.10);
+    --shadow-primary: 0 6px 18px rgba(0, 140, 207, 0.22);
 
-    --font-sans: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+    --font-heading: 'Poppins', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+    --font-sans: 'Noto Sans JP', 'Poppins', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
     --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 36px;
+    --space-5: 56px;
 
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -61,11 +72,12 @@
     font-family: var(--font-sans);
     background: var(--bg);
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 14px;
-    letter-spacing: -0.003em;
+    letter-spacing: 0;
+    font-weight: 400;
   }
   ::selection { background: var(--primary-soft); color: var(--primary-dark); }
 
@@ -88,8 +100,9 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    font-family: var(--font-heading);
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--text);
     letter-spacing: -0.01em;
   }
@@ -151,7 +164,7 @@
   main {
     max-width: 720px;
     margin: 0 auto;
-    padding: 56px 24px 96px;
+    padding: var(--space-5) var(--space-3) 96px;
     animation: appear 0.4s var(--ease);
   }
   @keyframes appear {
@@ -163,11 +176,12 @@
   .page-title { margin-bottom: 36px; }
   .page-title h1 {
     margin: 0 0 8px;
+    font-family: var(--font-heading);
     font-size: 32px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--text);
-    line-height: 1.15;
+    line-height: 1.2;
   }
   .page-title p {
     margin: 0;
@@ -177,7 +191,7 @@
   }
 
   /* ===== セクション ===== */
-  section { margin-bottom: 40px; }
+  section { margin-bottom: var(--space-4); }
   .section-label {
     font-size: 11px;
     font-weight: 700;
@@ -222,10 +236,11 @@
     margin-bottom: 10px;
   }
   .stat .value {
+    font-family: var(--font-heading);
     font-size: 28px;
     font-weight: 700;
     color: var(--text);
-    letter-spacing: -0.035em;
+    letter-spacing: -0.02em;
     font-variant-numeric: tabular-nums;
     line-height: 1.05;
   }
@@ -273,9 +288,10 @@
   .count-btn:hover::before { opacity: 1; }
   .count-btn > * { position: relative; }
   .count-btn .count-num {
+    font-family: var(--font-heading);
     font-size: 36px;
-    font-weight: 800;
-    letter-spacing: -0.05em;
+    font-weight: 700;
+    letter-spacing: -0.03em;
     line-height: 1;
     display: block;
     color: var(--text);
@@ -622,13 +638,13 @@
     border-radius: var(--radius);
   }
   .star-btn:hover {
-    color: var(--star);
-    background: var(--warning-bg);
+    color: var(--accent);
+    background: var(--accent-soft);
     box-shadow: none;
     transform: scale(1.08);
   }
-  .star-btn.active { color: var(--star); }
-  .star-btn.active:hover { background: var(--warning-bg); }
+  .star-btn.active { color: var(--accent); }
+  .star-btn.active:hover { background: var(--accent-soft); }
   .star-btn svg { width: 20px; height: 20px; }
 
   /* ===== 結果画面 ===== */
@@ -689,10 +705,11 @@
     place-items: center;
   }
   .score-value {
+    font-family: var(--font-heading);
     font-size: 52px;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.03em;
     color: var(--text);
     font-variant-numeric: tabular-nums;
   }
