@@ -3,281 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Java Silver 練習問題</title>
+<title>Java Silver — Practice</title>
 <style>
   :root {
-    /* ブランドカラー */
-    --primary: #008ccf;
-    --primary-dark: #016CA3;
-    --primary-light: #0CAAEB;
-    --primary-bright: #36C1FA;
-    --primary-bg: #f0f9ff;
-    --accent: #7a00df;
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --surface-2: #F5F5F5;
+    --border: #EAEAEA;
+    --border-strong: #D4D4D4;
 
-    /* ニュートラル（グレー系・青系ではない） */
-    --bg: #F5F5F6;
-    --surface: #ffffff;
-    --border: #E6E6E7;
-    --border-strong: #D0D0D1;
-    --text: #414143;
-    --text-2: #4E4E50;
-    --text-sub: #5B5B5F;
-    --text-weak: #86878A;
+    --text: #0A0A0A;
+    --text-2: #404040;
+    --text-sub: #737373;
+    --text-weak: #A3A3A3;
 
-    /* ステータス */
-    --success: #059669;
-    --warning: #d97706;
-    --danger: #dc2626;
-    --star: #f5b700;
+    --primary: #0A0A0A;
+    --primary-hover: #262626;
+    --accent: #0070F3;
+    --accent-hover: #0058C9;
+    --accent-bg: #EFF6FF;
 
-    --radius-lg: 16px;
-    --radius: 12px;
-    --radius-sm: 8px;
-    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04);
-    --shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
-    --brand-gradient: linear-gradient(90deg, #008bcf, #9DA0D5, #ff7979);
-    --hero-gradient: linear-gradient(145deg, #0CAAEB, #36C1FA, #7CD5FD);
+    --success: #17803D;
+    --success-bg: #F0FDF4;
+    --danger: #C2344D;
+    --danger-bg: #FEF2F2;
+    --warning: #B45309;
+    --warning-bg: #FFFBEB;
+    --star: #D97706;
+
+    --radius-xl: 14px;
+    --radius-lg: 10px;
+    --radius: 8px;
+    --radius-sm: 6px;
+
+    --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+
+    --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
   }
 
   * { box-sizing: border-box; }
   html, body { height: 100%; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Segoe UI", sans-serif;
+    font-family: var(--font-sans);
     background: var(--bg);
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    font-size: 15px;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 14px;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+  ::selection { background: rgba(10, 10, 10, 0.12); }
 
   /* ヘッダー */
   header {
-    background: var(--surface);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
     border-bottom: 1px solid var(--border);
-    padding: 16px 28px;
+    padding: 0 24px;
+    height: 56px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
-    z-index: 10;
-    backdrop-filter: saturate(180%) blur(8px);
-    background: rgba(255, 255, 255, 0.92);
+    z-index: 20;
   }
   .brand {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     color: var(--text);
-    letter-spacing: 0.02em;
+    letter-spacing: -0.01em;
   }
   .brand-mark {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    background: var(--brand-gradient);
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    background: var(--primary);
+    color: white;
     display: grid;
     place-items: center;
-    color: white;
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: -0.04em;
+  }
+  .brand-sub {
+    color: var(--text-sub);
+    font-weight: 400;
+    margin-left: 4px;
   }
   .header-right {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
   }
   #chapter-indicator {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--primary);
-    padding: 6px 14px;
-    background: var(--primary-bg);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-sub);
+    padding: 5px 10px;
+    background: var(--surface-2);
     border-radius: 999px;
-    border: 1px solid rgba(0, 140, 207, 0.15);
+    border: 1px solid var(--border);
+    letter-spacing: -0.005em;
   }
   #timer-display {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--primary);
-    min-width: 60px;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    min-width: 56px;
     text-align: right;
     font-variant-numeric: tabular-nums;
+    padding: 5px 10px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    border: 1px solid var(--border);
   }
-  #timer-display.warning { color: var(--warning); }
-  #timer-display.danger { color: var(--danger); animation: pulse 1s infinite; }
-  @keyframes pulse { 50% { opacity: 0.55; } }
+  #timer-display.active { display: inline-flex; }
+  #timer-display.warning {
+    color: var(--warning);
+    background: var(--warning-bg);
+    border-color: #FDE68A;
+  }
+  #timer-display.danger {
+    color: var(--danger);
+    background: var(--danger-bg);
+    border-color: #FECACA;
+  }
 
+  /* メイン */
   main {
-    max-width: 860px;
+    max-width: 720px;
     margin: 0 auto;
-    padding: 36px 24px 72px;
+    padding: 48px 24px 80px;
   }
 
-  /* ヒーロー */
-  .hero {
-    background: var(--hero-gradient);
-    color: white;
-    padding: 36px 32px;
-    border-radius: var(--radius-lg);
-    margin-bottom: 24px;
-    box-shadow: 0 10px 30px rgba(12, 170, 235, 0.18);
+  /* ページタイトル */
+  .page-title {
+    margin-bottom: 32px;
   }
-  .hero h2 {
+  .page-title h1 {
     margin: 0 0 6px;
-    font-size: 26px;
-    font-weight: 800;
-    letter-spacing: -0.01em;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    line-height: 1.2;
   }
-  .hero p {
+  .page-title p {
     margin: 0;
     font-size: 14px;
-    opacity: 0.92;
+    color: var(--text-sub);
+    letter-spacing: -0.005em;
+  }
+
+  /* セクション */
+  section { margin-bottom: 36px; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-sub);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
   }
 
   /* カード */
   .card {
     background: var(--surface);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     border: 1px solid var(--border);
-    padding: 28px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-sm);
-  }
-  .card-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0 0 20px;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: 0.01em;
-  }
-  .card-title .emoji {
-    font-size: 20px;
-    line-height: 1;
+    overflow: hidden;
   }
 
-  h2 {
-    margin: 0 0 16px;
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-  }
-
-  /* 統計カード */
+  /* 統計 */
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
   }
-  .stat-card {
-    background: var(--primary-bg);
-    border: 1px solid rgba(0, 140, 207, 0.12);
+  .stat {
     padding: 20px;
-    border-radius: var(--radius);
-    text-align: center;
-    transition: transform 0.2s ease;
+    border-right: 1px solid var(--border);
+    position: relative;
   }
-  .stat-card:hover { transform: translateY(-2px); }
-  .stat-card .stat-icon {
-    font-size: 22px;
-    margin-bottom: 6px;
-    line-height: 1;
-  }
-  .stat-card .label {
-    font-size: 12px;
+  .stat:last-child { border-right: none; }
+  .stat .label {
+    font-size: 11px;
     color: var(--text-sub);
-    font-weight: 600;
-    margin-bottom: 4px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    margin-bottom: 8px;
   }
-  .stat-card .value {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--primary);
-    letter-spacing: -0.02em;
+  .stat .value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.03em;
     font-variant-numeric: tabular-nums;
     line-height: 1.1;
   }
-  .stat-card .unit {
-    font-size: 14px;
+  .stat .unit {
+    font-size: 13px;
     color: var(--text-sub);
-    font-weight: 600;
+    font-weight: 500;
+    margin-left: 2px;
   }
 
-  /* 問題数選択（大きなボタン） */
+  /* 問題数選択 */
   .count-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 10px;
   }
-  .count-card {
+  .count-btn {
     cursor: pointer;
-    padding: 28px 20px;
+    padding: 22px 16px;
     background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
-    text-align: center;
-    transition: all 0.2s ease;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    text-align: left;
+    transition: all 0.15s ease;
     font-family: inherit;
+    color: var(--text);
   }
-  .count-card:hover {
-    border-color: var(--primary);
-    background: var(--primary-bg);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 140, 207, 0.12);
+  .count-btn:hover {
+    border-color: var(--text);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
   }
-  .count-card .count-emoji {
-    font-size: 30px;
-    line-height: 1;
-    margin-bottom: 8px;
-    display: block;
-  }
-  .count-card .count-num {
+  .count-btn .count-num {
     font-size: 32px;
-    font-weight: 800;
-    color: var(--primary);
-    letter-spacing: -0.02em;
-    line-height: 1;
-  }
-  .count-card .count-unit {
-    font-size: 16px;
     font-weight: 700;
-    color: var(--primary);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    display: block;
+    margin-bottom: 4px;
   }
-  .count-card .count-desc {
-    margin-top: 6px;
-    font-size: 12px;
+  .count-btn .count-unit {
+    font-size: 14px;
     color: var(--text-sub);
     font-weight: 500;
   }
+  .count-btn .count-desc {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--text-sub);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
 
-  /* 章選択ピル */
+  /* 章ピル */
   .pill-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
   .pill {
-    padding: 10px 16px;
-    border: 1.5px solid var(--border);
+    padding: 7px 13px;
+    border: 1px solid var(--border);
     background: var(--surface);
     border-radius: 999px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-2);
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.12s ease;
     font-family: inherit;
+    letter-spacing: -0.005em;
   }
   .pill:hover {
-    border-color: var(--primary);
-    color: var(--primary);
+    border-color: var(--text-2);
+    color: var(--text);
   }
   .pill.active {
     background: var(--primary);
@@ -287,316 +299,344 @@
 
   /* ボタン */
   button {
-    border: none;
-    padding: 12px 22px;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-weight: 600;
+    border: 1px solid transparent;
+    padding: 9px 14px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.12s ease;
     background: var(--primary);
     color: white;
     font-family: inherit;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.005em;
+    line-height: 1.4;
   }
   button:hover:not(:disabled) {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 140, 207, 0.22);
+    background: var(--primary-hover);
   }
   button:disabled { opacity: 0.4; cursor: not-allowed; }
   button.secondary {
     background: var(--surface);
     color: var(--text);
-    border: 1.5px solid var(--border-strong);
+    border: 1px solid var(--border);
   }
   button.secondary:hover:not(:disabled) {
-    background: var(--bg);
-    border-color: var(--primary);
-    color: var(--primary);
-    box-shadow: none;
+    border-color: var(--text-2);
+    background: var(--surface);
   }
   button.ghost {
     background: transparent;
-    color: var(--primary);
-    padding: 8px 14px;
-    box-shadow: none;
+    color: var(--text-2);
+    border: 1px solid transparent;
+    padding: 6px 10px;
   }
   button.ghost:hover:not(:disabled) {
-    background: var(--primary-bg);
-    box-shadow: none;
+    background: var(--surface-2);
+    color: var(--text);
   }
   button.large {
-    padding: 14px 28px;
-    font-size: 15px;
+    padding: 11px 18px;
+    font-size: 14px;
   }
   .btn-group {
     display: flex;
-    gap: 12px;
+    gap: 8px;
     flex-wrap: wrap;
   }
 
   /* 問題画面 */
-  .question-header {
+  .question-card { padding: 32px; }
+  @media (max-width: 540px) { .question-card { padding: 22px; } }
+
+  .question-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
   }
-  .question-number {
-    font-size: 13px;
+  .q-number {
+    font-size: 12px;
     color: var(--text-sub);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
   }
   .progress-bar {
-    height: 8px;
+    height: 3px;
     background: var(--border);
     border-radius: 999px;
     overflow: hidden;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
   .progress-fill {
     height: 100%;
-    background: var(--brand-gradient);
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--primary);
+    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     border-radius: 999px;
   }
   .question-text {
-    font-size: 16px;
-    line-height: 1.8;
+    font-size: 15px;
+    line-height: 1.75;
     margin-bottom: 24px;
     white-space: pre-wrap;
     word-break: break-word;
     color: var(--text);
+    letter-spacing: -0.005em;
   }
   .question-text p { margin: 0 0 10px; }
   pre.code-block {
-    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-family: var(--font-mono);
     font-size: 13px;
-    background: #1e293b;
-    color: #e2e8f0;
-    padding: 18px 20px;
-    border-radius: var(--radius-sm);
+    background: #0A0A0A;
+    color: #F5F5F5;
+    padding: 16px 18px;
+    border-radius: var(--radius);
     overflow-x: auto;
     margin: 14px 0;
-    line-height: 1.6;
-    letter-spacing: 0.01em;
+    line-height: 1.65;
+    letter-spacing: -0.005em;
   }
 
   /* 選択肢 */
   .choices {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 8px;
   }
   .choice {
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    padding: 16px 18px;
-    border: 2px solid var(--border);
-    border-radius: var(--radius);
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.12s ease;
     background: var(--surface);
   }
   .choice:hover:not(.disabled) {
-    border-color: var(--primary);
-    background: var(--primary-bg);
-    transform: translateX(2px);
+    border-color: var(--text-2);
+    background: var(--surface-2);
   }
   .choice.selected {
-    border-color: var(--primary);
-    background: var(--primary-bg);
+    border-color: var(--text);
+    background: var(--surface-2);
   }
   .choice.correct {
     border-color: var(--success);
-    background: #ecfdf5;
+    background: var(--success-bg);
   }
   .choice.incorrect {
     border-color: var(--danger);
-    background: #fef2f2;
+    background: var(--danger-bg);
   }
   .choice.disabled { cursor: default; }
   .choice-label {
     display: grid;
     place-items: center;
-    width: 30px;
-    height: 30px;
-    background: var(--bg);
-    border-radius: 50%;
-    font-weight: 700;
+    width: 22px;
+    height: 22px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
     color: var(--text-sub);
-    font-size: 14px;
+    font-size: 11px;
     flex-shrink: 0;
+    margin-top: 1px;
   }
-  .choice.selected .choice-label,
-  .choice:hover:not(.disabled) .choice-label {
+  .choice.selected .choice-label {
     background: var(--primary);
+    border-color: var(--primary);
     color: white;
   }
   .choice.correct .choice-label {
     background: var(--success);
+    border-color: var(--success);
     color: white;
   }
   .choice.incorrect .choice-label {
     background: var(--danger);
+    border-color: var(--danger);
     color: white;
   }
   .choice-text {
     flex: 1;
     white-space: pre-wrap;
     word-break: break-word;
-    font-size: 15px;
-    padding-top: 2px;
+    font-size: 14px;
     color: var(--text);
+    letter-spacing: -0.005em;
+    line-height: 1.6;
   }
 
   /* 解説 */
   .explanation {
-    margin-top: 24px;
+    margin-top: 20px;
     padding: 20px;
-    background: var(--primary-bg);
-    border-radius: var(--radius);
-    border-left: 5px solid var(--primary);
+    background: var(--surface-2);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
   }
   .explanation.correct {
-    background: #ecfdf5;
-    border-left-color: var(--success);
+    background: var(--success-bg);
+    border-color: #BBF7D0;
   }
   .explanation.incorrect {
-    background: #fef2f2;
-    border-left-color: var(--danger);
+    background: var(--danger-bg);
+    border-color: #FECACA;
   }
-  .explanation h4 {
-    margin: 14px 0 8px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-sub);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-  .explanation h4:first-of-type { margin-top: 0; }
-  .explanation p { margin: 0; font-size: 15px; line-height: 1.75; }
   .result-judge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: 4px;
-  }
-  .result-judge.correct { color: var(--success); }
-  .result-judge.incorrect { color: var(--danger); }
-  .detail-toggle {
-    margin-top: 14px;
-    font-size: 14px;
-    color: var(--primary);
-    cursor: pointer;
-    user-select: none;
-    font-weight: 700;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
   }
-  .detail-toggle:hover { text-decoration: underline; }
+  .result-judge .badge-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .result-judge.correct { color: var(--success); }
+  .result-judge.correct .badge-icon { background: var(--success); }
+  .result-judge.incorrect { color: var(--danger); }
+  .result-judge.incorrect .badge-icon { background: var(--danger); }
+  .exp-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-sub);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 16px 0 6px;
+  }
+  .exp-label:first-of-type { margin-top: 0; }
+  .exp-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    letter-spacing: -0.005em;
+  }
+  .detail-toggle {
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--text-2);
+    cursor: pointer;
+    user-select: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--border-strong);
+  }
+  .detail-toggle:hover { color: var(--text); border-bottom-color: var(--text-2); }
   .detail-content {
     margin-top: 10px;
     padding: 14px 16px;
     background: var(--surface);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
     border: 1px solid var(--border);
     display: none;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-2);
-    line-height: 1.8;
+    line-height: 1.75;
+    letter-spacing: -0.005em;
   }
-  .detail-content.show { display: block; animation: fadeIn 0.2s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+  .detail-content.show {
+    display: block;
+    animation: fade 0.18s ease;
+  }
+  @keyframes fade { from { opacity: 0; transform: translateY(-2px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* 星ボタン */
+  /* 星 */
   .star-btn {
     background: transparent;
     border: none;
-    font-size: 26px;
+    padding: 4px;
     cursor: pointer;
-    padding: 6px;
-    color: var(--border-strong);
-    transition: all 0.2s ease;
-    line-height: 1;
-    box-shadow: none;
+    color: var(--text-weak);
+    transition: all 0.15s ease;
+    line-height: 0;
   }
-  .star-btn.active { color: var(--star); transform: scale(1.1); }
-  .star-btn:hover { color: var(--star); background: transparent; box-shadow: none; transform: scale(1.1); }
+  .star-btn:hover { color: var(--star); }
+  .star-btn.active { color: var(--star); }
+  .star-btn svg { width: 18px; height: 18px; }
 
   /* 結果画面 */
-  .score-hero {
-    background: var(--hero-gradient);
-    color: white;
-    padding: 40px 24px;
-    border-radius: var(--radius-lg);
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 40px 32px;
     text-align: center;
     margin-bottom: 24px;
-    box-shadow: 0 10px 30px rgba(12, 170, 235, 0.18);
   }
-  .score-hero.poor {
-    background: linear-gradient(145deg, #fca5a5, #f87171);
-    box-shadow: 0 10px 30px rgba(248, 113, 113, 0.18);
+  .score-card.high { border-color: #86EFAC; background: linear-gradient(180deg, #F0FDF4 0%, var(--surface) 60%); }
+  .score-card.mid { border-color: #FCD34D; background: linear-gradient(180deg, #FFFBEB 0%, var(--surface) 60%); }
+  .score-card.low { border-color: #FCA5A5; background: linear-gradient(180deg, #FEF2F2 0%, var(--surface) 60%); }
+  .score-label {
+    font-size: 11px;
+    color: var(--text-sub);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
   }
-  .score-hero.mid {
-    background: linear-gradient(145deg, #fbbf24, #f59e0b);
-    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.18);
-  }
-  .score-hero .emoji {
-    font-size: 44px;
-    margin-bottom: 10px;
-    display: block;
-  }
-  .score-hero .big {
-    font-size: 72px;
-    font-weight: 800;
+  .score-value {
+    font-size: 64px;
+    font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
+    color: var(--text);
     font-variant-numeric: tabular-nums;
   }
-  .score-hero .unit {
+  .score-value .unit {
     font-size: 28px;
-    opacity: 0.9;
-    font-weight: 700;
+    color: var(--text-sub);
+    font-weight: 600;
+    margin-left: 4px;
   }
-  .score-hero .detail {
-    margin-top: 10px;
-    font-size: 15px;
-    opacity: 0.92;
-    font-weight: 500;
+  .score-detail {
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--text-sub);
+    letter-spacing: -0.005em;
   }
 
   /* 章別結果 */
-  .chapter-result {
+  .chapter-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 4px;
+    padding: 14px 20px;
     border-bottom: 1px solid var(--border);
     gap: 16px;
   }
-  .chapter-result:last-child { border-bottom: none; }
+  .chapter-row:last-child { border-bottom: none; }
   .chapter-name {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text);
-    font-size: 14px;
+    font-size: 13px;
+    letter-spacing: -0.005em;
   }
   .chapter-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
   }
   .chapter-bar {
     width: 100px;
-    height: 6px;
+    height: 4px;
     background: var(--border);
     border-radius: 999px;
     overflow: hidden;
@@ -604,46 +644,49 @@
   .chapter-bar-fill {
     height: 100%;
     border-radius: 999px;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .rate {
-    font-weight: 700;
-    min-width: 80px;
+    font-weight: 600;
+    min-width: 72px;
     text-align: right;
-    font-size: 14px;
+    font-size: 13px;
     font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
   }
-  .rate.high { color: var(--success); }
-  .rate.mid { color: var(--warning); }
-  .rate.low { color: var(--danger); }
-  .chapter-bar-fill.high { background: var(--success); }
-  .chapter-bar-fill.mid { background: var(--warning); }
-  .chapter-bar-fill.low { background: var(--danger); }
+  .rate.high, .chapter-bar-fill.high { color: var(--success); background: var(--success); }
+  .rate.mid, .chapter-bar-fill.mid { color: var(--warning); background: var(--warning); }
+  .rate.low, .chapter-bar-fill.low { color: var(--danger); background: var(--danger); }
+  .rate.high { background: transparent; }
+  .rate.mid { background: transparent; }
+  .rate.low { background: transparent; }
 
   /* 設定 */
-  .settings-row {
+  .list-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 4px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border);
     gap: 16px;
   }
-  .settings-row:last-child { border-bottom: none; }
-  .settings-row .settings-label {
-    font-weight: 600;
+  .list-item:last-child { border-bottom: none; }
+  .list-label {
+    font-weight: 500;
     font-size: 14px;
     color: var(--text);
+    letter-spacing: -0.005em;
   }
-  .settings-row .settings-hint {
+  .list-hint {
     font-size: 12px;
     color: var(--text-sub);
     margin-top: 2px;
-    font-weight: 400;
+    letter-spacing: -0.005em;
   }
   .switch {
     position: relative;
-    width: 48px;
-    height: 28px;
+    width: 36px;
+    height: 20px;
     background: var(--border-strong);
     border-radius: 999px;
     cursor: pointer;
@@ -654,31 +697,40 @@
   .switch::after {
     content: '';
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 22px;
-    height: 22px;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
     background: white;
     border-radius: 50%;
-    transition: transform 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
   }
-  .switch.on::after { transform: translateX(20px); }
+  .switch.on::after { transform: translateX(16px); }
 
-  /* スモール画面対応 */
-  @media (max-width: 540px) {
-    header { padding: 12px 18px; }
-    main { padding: 24px 16px 60px; }
-    .hero { padding: 28px 22px; }
-    .hero h2 { font-size: 22px; }
-    .card { padding: 22px 18px; }
-    .count-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .count-card { padding: 18px 8px; }
-    .count-card .count-num { font-size: 26px; }
-    .count-card .count-emoji { font-size: 24px; }
-    .score-hero .big { font-size: 58px; }
-    .choice { padding: 14px; }
+  /* タイトル 小 */
+  .card-section-title {
+    padding: 18px 20px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-sub);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 620px) {
+    main { padding: 32px 18px 60px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--border); }
+    .count-grid { gap: 8px; }
+    .count-btn { padding: 18px 12px; }
+    .count-btn .count-num { font-size: 26px; }
+    .score-value { font-size: 52px; }
     .chapter-bar { width: 60px; }
+    .page-title h1 { font-size: 24px; }
   }
 </style>
 </head>
@@ -686,11 +738,11 @@
 <header>
   <div class="brand">
     <div class="brand-mark">JS</div>
-    <span>Java Silver 練習問題</span>
+    <span>Java Silver<span class="brand-sub"> · Practice</span></span>
   </div>
   <div class="header-right">
     <span id="chapter-indicator">ホーム</span>
-    <span id="timer-display" style="display:none;"></span>
+    <span id="timer-display"></span>
   </div>
 </header>
 
@@ -724,12 +776,9 @@
       if (raw) return JSON.parse(raw);
     } catch (_) {}
     return {
-      starred: [],
-      lastIncorrect: [],
-      totalAnswered: 0,
-      totalCorrect: 0,
-      timerEnabled: true,
-      selectedChapter: 'all'
+      starred: [], lastIncorrect: [],
+      totalAnswered: 0, totalCorrect: 0,
+      timerEnabled: true, selectedChapter: 'all'
     };
   }
   function saveState() {
@@ -758,25 +807,20 @@
 
   function escapeHtml(s) {
     return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   function formatQuestion(text) {
     const lines = text.split('\n');
     const buf = [];
     let codeBuf = [];
-
     const flushCode = () => {
       if (codeBuf.length) {
         buf.push(`<pre class="code-block">${escapeHtml(codeBuf.join('\n'))}</pre>`);
         codeBuf = [];
       }
     };
-
     for (const line of lines) {
       const isCodeLine = /[{}();]|^\s{2,}|\bpublic\b|\bprivate\b|\bclass\b|\bstatic\b|\bvoid\b|\bint\b|System\.out|\bfor\b|\bwhile\b|\bif\b|\belse\b|\breturn\b|\bnew\b|\btry\b|\bcatch\b|\bfinally\b|\bthrow\b/.test(line);
       if (isCodeLine) codeBuf.push(line);
@@ -796,21 +840,21 @@
 
   function stopTimer() {
     if (timerId) { clearInterval(timerId); timerId = null; }
-    timerDisplay.style.display = 'none';
+    timerDisplay.classList.remove('active', 'warning', 'danger');
   }
 
   function startTimer(onTimeout) {
     stopTimer();
     if (!state.timerEnabled) return;
     let remaining = TIMER_SECONDS;
-    timerDisplay.style.display = 'inline';
-    timerDisplay.className = '';
-    timerDisplay.textContent = `⏱ ${remaining}s`;
+    timerDisplay.classList.add('active');
+    timerDisplay.textContent = `${remaining}s`;
     timerId = setInterval(() => {
       remaining--;
-      timerDisplay.textContent = `⏱ ${remaining}s`;
-      if (remaining <= 10) timerDisplay.className = 'danger';
-      else if (remaining <= 30) timerDisplay.className = 'warning';
+      timerDisplay.textContent = `${remaining}s`;
+      timerDisplay.classList.remove('warning', 'danger');
+      if (remaining <= 10) timerDisplay.classList.add('danger');
+      else if (remaining <= 30) timerDisplay.classList.add('warning');
       if (remaining <= 0) {
         stopTimer();
         onTimeout();
@@ -818,110 +862,103 @@
     }, 1000);
   }
 
-  // ホーム画面
+  // アイコン
+  const ICON_STAR = `<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.9 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7L12 2z"/></svg>`;
+  const ICON_STAR_OUTLINE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.9 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7L12 2z"/></svg>`;
+
+  // ホーム
   function renderHome() {
     stopTimer();
     setChapterIndicator('ホーム');
     const accuracy = state.totalAnswered > 0
-      ? Math.round((state.totalCorrect / state.totalAnswered) * 100)
-      : 0;
+      ? Math.round((state.totalCorrect / state.totalAnswered) * 100) : 0;
     const starredCount = state.starred.length;
     const lastIncorrectCount = state.lastIncorrect.length;
 
     const chapterPills = [
-      { v: 'all', label: '全章ランダム' },
-      ...Object.keys(CHAPTER_SHORT).map(k => ({ v: k, label: `${k}章 ${CHAPTER_SHORT[k]}` }))
+      { v: 'all', label: '全章' },
+      ...Object.keys(CHAPTER_SHORT).map(k => ({ v: k, label: `${k}章 · ${CHAPTER_SHORT[k]}` }))
     ].map(opt => `
       <button class="pill ${state.selectedChapter === opt.v ? 'active' : ''}" data-chapter="${opt.v}">${opt.label}</button>
     `).join('');
 
     render(`
-      <div class="hero">
-        <h2>✨ 今日もコツコツ、合格に向けて</h2>
-        <p>150問のオリジナル問題で Java Silver SE 11 対策</p>
+      <div class="page-title">
+        <h1>練習を始める</h1>
+        <p>Java Silver SE 11 対策 · 150問収録</p>
       </div>
 
-      <div class="card">
-        <h3 class="card-title"><span class="emoji">📊</span>あなたの学習状況</h3>
+      <section>
         <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon">🎯</div>
+          <div class="stat">
             <div class="label">累計正答率</div>
             <div class="value">${accuracy}<span class="unit">%</span></div>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon">📝</div>
-            <div class="label">累計回答数</div>
+          <div class="stat">
+            <div class="label">累計回答</div>
             <div class="value">${state.totalAnswered}</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon">⭐</div>
+          <div class="stat">
             <div class="label">苦手マーク</div>
             <div class="value">${starredCount}</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon">🔁</div>
+          <div class="stat">
             <div class="label">直近の誤答</div>
             <div class="value">${lastIncorrectCount}</div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="card">
-        <h3 class="card-title"><span class="emoji">📚</span>出題範囲を選ぶ</h3>
+      <section>
+        <div class="section-label">出題範囲</div>
         <div class="pill-group" id="chapter-pills">${chapterPills}</div>
-      </div>
+      </section>
 
-      <div class="card">
-        <h3 class="card-title"><span class="emoji">🚀</span>問題数を選んでスタート</h3>
+      <section>
+        <div class="section-label">問題数を選択</div>
         <div class="count-grid">
-          <button class="count-card" data-count="5">
-            <span class="count-emoji">☕</span>
-            <div><span class="count-num">5</span><span class="count-unit">問</span></div>
+          <button class="count-btn" data-count="5">
+            <span class="count-num">5</span><span class="count-unit">問</span>
             <div class="count-desc">サクッと確認</div>
           </button>
-          <button class="count-card" data-count="10">
-            <span class="count-emoji">🎯</span>
-            <div><span class="count-num">10</span><span class="count-unit">問</span></div>
+          <button class="count-btn" data-count="10">
+            <span class="count-num">10</span><span class="count-unit">問</span>
             <div class="count-desc">標準</div>
           </button>
-          <button class="count-card" data-count="20">
-            <span class="count-emoji">🔥</span>
-            <div><span class="count-num">20</span><span class="count-unit">問</span></div>
-            <div class="count-desc">本気モード</div>
+          <button class="count-btn" data-count="20">
+            <span class="count-num">20</span><span class="count-unit">問</span>
+            <div class="count-desc">じっくり</div>
           </button>
         </div>
-      </div>
+      </section>
 
-      <div class="card">
-        <h3 class="card-title"><span class="emoji">🔄</span>復習モード</h3>
+      <section>
+        <div class="section-label">復習モード</div>
         <div class="btn-group">
-          <button class="secondary" id="btn-review" ${lastIncorrectCount === 0 ? 'disabled' : ''}>
-            🔁 直近のミスを復習（${lastIncorrectCount}問）
-          </button>
-          <button class="secondary" id="btn-starred" ${starredCount === 0 ? 'disabled' : ''}>
-            ⭐ 苦手のみ出題（${starredCount}問）
-          </button>
+          <button class="secondary" id="btn-review" ${lastIncorrectCount === 0 ? 'disabled' : ''}>直近のミスを復習 · ${lastIncorrectCount}問</button>
+          <button class="secondary" id="btn-starred" ${starredCount === 0 ? 'disabled' : ''}>苦手マークのみ · ${starredCount}問</button>
         </div>
-      </div>
+      </section>
 
-      <div class="card">
-        <h3 class="card-title"><span class="emoji">⚙️</span>設定</h3>
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">制限時間</div>
-            <div class="settings-hint">1問あたり90秒（本試験の1.7分ペース）</div>
+      <section>
+        <div class="section-label">設定</div>
+        <div class="card">
+          <div class="list-item">
+            <div>
+              <div class="list-label">制限時間</div>
+              <div class="list-hint">1問あたり90秒（本試験の約1.7分ペース）</div>
+            </div>
+            <div class="switch ${state.timerEnabled ? 'on' : ''}" id="switch-timer"></div>
           </div>
-          <div class="switch ${state.timerEnabled ? 'on' : ''}" id="switch-timer"></div>
-        </div>
-        <div class="settings-row">
-          <div>
-            <div class="settings-label">進捗データ</div>
-            <div class="settings-hint">累計・苦手マーク・誤答履歴をリセット</div>
+          <div class="list-item">
+            <div>
+              <div class="list-label">進捗データ</div>
+              <div class="list-hint">累計・苦手マーク・誤答履歴をリセット</div>
+            </div>
+            <button class="ghost" id="btn-reset">リセット</button>
           </div>
-          <button class="ghost" id="btn-reset">リセット</button>
         </div>
-      </div>
+      </section>
     `);
 
     app.querySelectorAll('#chapter-pills .pill').forEach(btn => {
@@ -931,14 +968,12 @@
         renderHome();
       });
     });
-
     app.querySelectorAll('[data-count]').forEach(btn => {
       btn.addEventListener('click', () => {
         const count = parseInt(btn.dataset.count, 10);
         startQuiz({ count, chapter: state.selectedChapter, mode: 'normal' });
       });
     });
-
     document.getElementById('btn-review').addEventListener('click', () => startQuiz({ mode: 'review' }));
     document.getElementById('btn-starred').addEventListener('click', () => startQuiz({ mode: 'starred' }));
     document.getElementById('switch-timer').addEventListener('click', () => {
@@ -961,11 +996,9 @@
 
   function startQuiz({ count, chapter, mode }) {
     let pool;
-    if (mode === 'review') {
-      pool = QUESTIONS.filter(q => state.lastIncorrect.includes(q.id));
-    } else if (mode === 'starred') {
-      pool = QUESTIONS.filter(q => state.starred.includes(q.id));
-    } else {
+    if (mode === 'review') pool = QUESTIONS.filter(q => state.lastIncorrect.includes(q.id));
+    else if (mode === 'starred') pool = QUESTIONS.filter(q => state.starred.includes(q.id));
+    else {
       if (chapter === 'all') pool = QUESTIONS.slice();
       else {
         const c = parseInt(chapter, 10);
@@ -986,12 +1019,7 @@
       return { ...q, choices: shuffledChoices, answer: newAnswer };
     });
 
-    session = {
-      questions,
-      index: 0,
-      answers: [],
-      newlyIncorrect: []
-    };
+    session = { questions, index: 0, answers: [], newlyIncorrect: [] };
     renderQuestion();
   }
 
@@ -1001,10 +1029,12 @@
     setChapterIndicator(CHAPTER_NAMES[q.chapter]);
 
     render(`
-      <div class="card">
-        <div class="question-header">
-          <span class="question-number">Q ${session.index + 1} / ${session.questions.length}</span>
-          <button class="star-btn ${isStarred ? 'active' : ''}" id="btn-star" title="苦手マーク">★</button>
+      <div class="card question-card">
+        <div class="question-meta">
+          <span class="q-number">Q ${String(session.index + 1).padStart(2, '0')} / ${String(session.questions.length).padStart(2, '0')}</span>
+          <button class="star-btn ${isStarred ? 'active' : ''}" id="btn-star" title="苦手マーク">
+            ${isStarred ? ICON_STAR : ICON_STAR_OUTLINE}
+          </button>
         </div>
         <div class="progress-bar">
           <div class="progress-fill" style="width:${((session.index) / session.questions.length) * 100}%;"></div>
@@ -1019,8 +1049,8 @@
           `).join('')}
         </div>
         <div id="explanation-area"></div>
-        <div class="btn-group" id="bottom-btn" style="justify-content:flex-end; margin-top:8px;">
-          <button class="secondary" id="btn-quit">中断して戻る</button>
+        <div class="btn-group" id="bottom-btn" style="justify-content:flex-end; margin-top:20px;">
+          <button class="ghost" id="btn-quit">中断</button>
         </div>
       </div>
     `);
@@ -1038,7 +1068,6 @@
     document.querySelectorAll('#choices .choice').forEach(el => {
       el.addEventListener('click', () => selectAnswer(parseInt(el.dataset.index, 10)));
     });
-
     startTimer(() => selectAnswer(-1));
   }
 
@@ -1071,19 +1100,22 @@
       if (i === chosen && !correct) el.classList.add('incorrect');
     });
 
-    const judgeText = chosen === -1
-      ? '<span class="result-judge incorrect">⏱ 時間切れ</span>'
-      : correct
-        ? '<span class="result-judge correct">✓ 正解！</span>'
-        : '<span class="result-judge incorrect">✗ 不正解</span>';
+    const judgeLabel = chosen === -1 ? '時間切れ' : correct ? '正解' : '不正解';
+    const judgeIcon = correct ? '✓' : '✕';
+    const judgeText = `
+      <div class="result-judge ${correct ? 'correct' : 'incorrect'}">
+        <span class="badge-icon">${judgeIcon}</span>
+        <span>${judgeLabel}</span>
+      </div>
+    `;
 
     const expArea = document.getElementById('explanation-area');
     expArea.innerHTML = `
       <div class="explanation ${correct ? 'correct' : 'incorrect'}">
         ${judgeText}
-        <h4>💡 ざっくり解説</h4>
-        <p>${escapeHtml(q.brief)}</p>
-        <div class="detail-toggle" id="detail-toggle">▼ 詳しく解説を見る</div>
+        <div class="exp-label">ざっくり解説</div>
+        <div class="exp-text">${escapeHtml(q.brief)}</div>
+        <div class="detail-toggle" id="detail-toggle">詳しく解説を見る</div>
         <div class="detail-content" id="detail-content">${escapeHtml(q.detail)}</div>
       </div>
     `;
@@ -1091,14 +1123,14 @@
       const dc = document.getElementById('detail-content');
       const dt = document.getElementById('detail-toggle');
       dc.classList.toggle('show');
-      dt.textContent = dc.classList.contains('show') ? '▲ 詳しく解説を閉じる' : '▼ 詳しく解説を見る';
+      dt.textContent = dc.classList.contains('show') ? '閉じる' : '詳しく解説を見る';
     });
 
     const bottomBtn = document.getElementById('bottom-btn');
     const isLast = session.index === session.questions.length - 1;
     bottomBtn.innerHTML = `
-      <button class="secondary" id="btn-quit-2">中断</button>
-      <button id="btn-next" class="large">${isLast ? '🎉 結果を見る' : '次の問題へ →'}</button>
+      <button class="ghost" id="btn-quit-2">中断</button>
+      <button id="btn-next" class="large">${isLast ? '結果を見る' : '次の問題へ'}</button>
     `;
     document.getElementById('btn-quit-2').addEventListener('click', () => {
       if (confirm('セッションを中断してホームへ戻りますか？')) {
@@ -1139,51 +1171,53 @@
         const r = Math.round((cc / t) * 100);
         const cls = r >= 80 ? 'high' : r >= 50 ? 'mid' : 'low';
         return `
-          <div class="chapter-result">
+          <div class="chapter-row">
             <span class="chapter-name">${CHAPTER_NAMES[c]}</span>
             <div class="chapter-right">
               <div class="chapter-bar"><div class="chapter-bar-fill ${cls}" style="width:${r}%;"></div></div>
-              <span class="rate ${cls}">${cc}/${t} (${r}%)</span>
+              <span class="rate ${cls}">${cc}/${t} · ${r}%</span>
             </div>
           </div>
         `;
       }).join('');
 
-    const heroCls = rate >= 80 ? '' : rate >= 50 ? 'mid' : 'poor';
-    const heroEmoji = rate >= 80 ? '🎉' : rate >= 50 ? '💪' : '📚';
-    const heroComment = rate >= 80
-      ? 'すばらしい！このペースで本番もいけます'
+    const heroCls = rate >= 80 ? 'high' : rate >= 50 ? 'mid' : 'low';
+    const comment = rate >= 80
+      ? 'この調子で本番も突破できます'
       : rate >= 50
-        ? 'もう一歩。復習モードで詰めよう'
-        : '基礎を復習して再チャレンジ';
+        ? '間違えた問題を復習モードで固めましょう'
+        : '基礎から復習して再チャレンジしましょう';
 
     render(`
-      <div class="score-hero ${heroCls}">
-        <span class="emoji">${heroEmoji}</span>
-        <div><span class="big">${rate}</span><span class="unit">%</span></div>
-        <div class="detail">${correct} / ${total} 問正解 · ${heroComment}</div>
+      <div class="page-title">
+        <h1>結果</h1>
+        <p>${comment}</p>
       </div>
 
-      <div class="card">
-        <h3 class="card-title"><span class="emoji">📈</span>章別の正答率</h3>
-        ${chapterHtml}
+      <div class="score-card ${heroCls}">
+        <div class="score-label">正答率</div>
+        <div class="score-value">${rate}<span class="unit">%</span></div>
+        <div class="score-detail">${correct} / ${total} 問正解</div>
       </div>
 
-      <div class="card">
-        <div class="btn-group">
-          <button id="btn-home" class="large">🏠 ホームへ戻る</button>
-          ${session.newlyIncorrect.length > 0
-            ? '<button class="secondary large" id="btn-retry-wrong">🔁 間違えた問題だけ再挑戦</button>'
-            : ''}
+      <section>
+        <div class="section-label">章別の正答率</div>
+        <div class="card">
+          ${chapterHtml}
         </div>
+      </section>
+
+      <div class="btn-group" style="margin-top:24px;">
+        <button id="btn-home" class="large">ホームへ戻る</button>
+        ${session.newlyIncorrect.length > 0
+          ? '<button class="secondary large" id="btn-retry-wrong">間違えた問題だけ再挑戦</button>'
+          : ''}
       </div>
     `);
 
     document.getElementById('btn-home').addEventListener('click', renderHome);
     const retryBtn = document.getElementById('btn-retry-wrong');
-    if (retryBtn) {
-      retryBtn.addEventListener('click', () => startQuiz({ mode: 'review' }));
-    }
+    if (retryBtn) retryBtn.addEventListener('click', () => startQuiz({ mode: 'review' }));
   }
 
   renderHome();
