@@ -6,83 +6,61 @@
 <title>Java Silver SE 17 — Practice</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #FFFFFF;
+    --bg: #FAFAFA;
     --surface: #FFFFFF;
-    --surface-2: #F7F7F7;
-    --border: #E5E5E5;
-    --border-strong: #C7C7C7;
+    --surface-2: #F5F5F6;
+    --surface-3: #EEEEF0;
+    --border: #E6E6E7;
+    --border-strong: #D0D0D1;
 
-    --text: #3C3C3C;
-    --text-2: #4B4B4B;
-    --text-sub: #777777;
-    --text-weak: #AFAFAF;
+    --text: #414143;
+    --text-2: #4E4E50;
+    --text-sub: #6B6C6F;
+    --text-weak: #86878A;
 
-    --primary: #58CC02;
-    --primary-hover: #4BAC00;
-    --primary-dark: #4BAC00;
-    --primary-darker: #3D8E00;
-    --primary-light: #89E219;
-    --primary-soft: #D7FFB8;
-    --primary-softer: #F0FFE0;
+    --primary: #18181B;
+    --primary-hover: #27272A;
+    --primary-soft: #E6E6E7;
+    --primary-dark: #18181B;
 
-    --purple: #CE82FF;
-    --purple-dark: #A560E0;
-    --purple-soft: #F2E4FF;
+    --accent: #008CCF;
+    --accent-hover: #016CA3;
+    --accent-soft: #CEEBFA;
+    --accent-softer: #F0F9FF;
 
-    --orange: #FF9600;
-    --orange-dark: #E08600;
-    --orange-soft: #FFE8C8;
-
-    --pink: #FF4B4B;
-    --pink-dark: #E04040;
-    --pink-soft: #FFD9D9;
-
-    --blue: #1CB0F6;
-    --blue-dark: #0095D6;
-    --blue-soft: #C8EEFF;
-
-    --yellow: #FFC800;
-    --yellow-dark: #E0AF00;
-    --yellow-soft: #FFF3C0;
-
-    --accent: #FFC800;
-    --accent-soft: #FFF3C0;
-
-    --success: #58CC02;
-    --success-bg: #F0FFE0;
-    --success-border: #89E219;
-    --danger: #FF4B4B;
-    --danger-bg: #FFE5E5;
-    --danger-border: #FFB8B8;
-    --warning: #FF9600;
-    --warning-bg: #FFE8C8;
-    --warning-border: #FFCD85;
-    --star: #FFC800;
+    --success: #059669;
+    --success-soft: #D1FAE5;
+    --success-softer: #ECFDF5;
+    --warning: #D97706;
+    --warning-soft: #FED7AA;
+    --warning-softer: #FFFBEB;
+    --danger: #DC2626;
+    --danger-soft: #FEE2E2;
+    --danger-softer: #FEF2F2;
+    --star: #F59E0B;
 
     --radius-xl: 16px;
-    --radius-lg: 14px;
-    --radius: 12px;
-    --radius-sm: 10px;
+    --radius-lg: 12px;
+    --radius: 10px;
+    --radius-sm: 8px;
 
-    --btn-shadow: 0 4px 0;
-    --shadow-xs: 0 2px 0 rgba(0, 0, 0, 0.04);
-    --shadow-sm: 0 2px 0 var(--border);
-    --shadow-md: 0 4px 0 var(--border);
-    --shadow-lg: 0 6px 0 rgba(0, 0, 0, 0.08);
-    --shadow-primary: 0 4px 0 var(--primary-dark);
+    --shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.04);
+    --shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(16, 24, 40, 0.06), 0 2px 4px -1px rgba(16, 24, 40, 0.04);
+    --shadow-lg: 0 10px 15px -3px rgba(16, 24, 40, 0.06), 0 4px 6px -2px rgba(16, 24, 40, 0.04);
 
-    --font-heading: 'Nunito', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
-    --font-sans: 'Nunito', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
-    --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --font-heading: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+    --font-sans: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
     --space-1: 8px;
     --space-2: 16px;
     --space-3: 24px;
-    --space-4: 36px;
-    --space-5: 56px;
+    --space-4: 40px;
+    --space-5: 64px;
 
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -94,12 +72,12 @@
     font-family: var(--font-sans);
     background: var(--bg);
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 15px;
-    letter-spacing: 0;
-    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.005em;
+    font-weight: 500;
   }
   ::selection { background: var(--primary-soft); color: var(--primary-dark); }
 
@@ -129,20 +107,15 @@
     letter-spacing: -0.01em;
   }
   .brand-mark {
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
     background: var(--primary);
-    border: 2px solid var(--primary-dark);
     color: white;
     display: grid;
     place-items: center;
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 13px;
-    letter-spacing: 0;
-    box-shadow: 0 3px 0 var(--primary-dark);
   }
+  .brand-mark svg { width: 16px; height: 16px; }
   .brand-sub {
     color: var(--text-weak);
     font-weight: 400;
@@ -156,33 +129,30 @@
   }
   #chapter-indicator {
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 500;
     color: var(--text-sub);
-    padding: 7px 14px;
+    padding: 5px 12px;
     background: var(--surface-2);
-    border-radius: 999px;
-    border: 2px solid var(--border);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    border-radius: 6px;
+    letter-spacing: 0;
   }
   #timer-display {
     display: none;
     align-items: center;
     gap: 4px;
-    font-size: 14px;
-    font-weight: 900;
-    color: var(--primary-darker);
-    min-width: 64px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 56px;
     text-align: right;
     font-variant-numeric: tabular-nums;
-    padding: 7px 14px;
-    background: var(--primary-soft);
-    border-radius: 999px;
-    border: 2px solid var(--primary-dark);
+    padding: 5px 12px;
+    background: var(--accent-softer);
+    border-radius: 6px;
   }
   #timer-display.active { display: inline-flex; }
-  #timer-display.warning { color: var(--warning); background: var(--warning-bg); border-color: var(--warning-border); }
-  #timer-display.danger { color: var(--danger); background: var(--danger-bg); border-color: var(--danger-border); animation: pulse 1.2s ease-in-out infinite; }
+  #timer-display.warning { color: var(--warning); background: var(--warning-softer); }
+  #timer-display.danger { color: var(--danger); background: var(--danger-softer); animation: pulse 1.2s ease-in-out infinite; }
   @keyframes pulse { 50% { opacity: 0.6; } }
 
   /* ===== メイン ===== */
@@ -198,42 +168,41 @@
   }
 
   /* ===== ページタイトル ===== */
-  .page-title { margin-bottom: 36px; }
+  .page-title { margin-bottom: 40px; }
   .page-title h1 {
-    margin: 0 0 8px;
+    margin: 0 0 10px;
     font-family: var(--font-heading);
-    font-size: 36px;
-    font-weight: 900;
-    letter-spacing: -0.02em;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.024em;
     color: var(--text);
-    line-height: 1.15;
+    line-height: 1.2;
   }
   .page-title p {
     margin: 0;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--text-sub);
     letter-spacing: 0;
+    line-height: 1.6;
   }
 
   /* ===== セクション ===== */
   section { margin-bottom: var(--space-4); }
   .section-label {
     font-size: 12px;
-    font-weight: 900;
+    font-weight: 600;
     color: var(--text-sub);
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
-    margin: 0 0 14px;
+    letter-spacing: 0;
+    margin: 0 0 12px;
   }
 
   /* ===== カード ===== */
   .card {
     background: var(--surface);
-    border-radius: var(--radius-xl);
-    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
     overflow: hidden;
-    box-shadow: 0 2px 0 var(--border);
   }
 
   /* ===== 統計 ===== */
@@ -242,13 +211,12 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
     background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 4px 0 var(--border);
   }
   .stat {
-    padding: 22px 20px;
+    padding: 20px 18px;
     border-right: 1px solid var(--border);
     transition: background 0.2s var(--ease);
   }
@@ -258,26 +226,23 @@
     font-size: 12px;
     color: var(--text-sub);
     font-weight: 500;
-    letter-spacing: -0.005em;
-    margin-bottom: 10px;
+    letter-spacing: 0;
+    margin-bottom: 8px;
   }
   .stat .value {
     font-family: var(--font-heading);
-    font-size: 30px;
-    font-weight: 900;
+    font-size: 24px;
+    font-weight: 700;
     color: var(--text);
     letter-spacing: -0.02em;
     font-variant-numeric: tabular-nums;
-    line-height: 1.05;
+    line-height: 1.1;
   }
-  .stat .value.accent { color: var(--primary); }
-  .stat:nth-child(2) .value { color: var(--blue); }
-  .stat:nth-child(3) .value { color: var(--yellow-dark); }
-  .stat:nth-child(4) .value { color: var(--pink); }
+  .stat .value.accent { color: var(--accent); }
   .stat .unit {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-sub);
-    font-weight: 600;
+    font-weight: 500;
     margin-left: 2px;
   }
 
@@ -289,154 +254,132 @@
   }
   .count-btn {
     cursor: pointer;
-    padding: 22px 18px;
+    padding: 24px 18px;
     background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
     text-align: center;
-    transition: transform 0.08s var(--ease);
+    transition: all 0.15s var(--ease);
     font-family: inherit;
     color: var(--text);
-    box-shadow: 0 4px 0 var(--border);
-    position: relative;
     text-transform: none;
     letter-spacing: 0;
   }
-  .count-btn:hover { filter: brightness(1.02); }
-  .count-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--border); }
-
-  .count-btn[data-count="5"] { color: var(--primary); border-color: var(--primary-dark); box-shadow: 0 4px 0 var(--primary-dark); }
-  .count-btn[data-count="5"]:active { box-shadow: 0 2px 0 var(--primary-dark); }
-  .count-btn[data-count="10"] { color: var(--blue); border-color: var(--blue-dark); box-shadow: 0 4px 0 var(--blue-dark); }
-  .count-btn[data-count="10"]:active { box-shadow: 0 2px 0 var(--blue-dark); }
-  .count-btn[data-count="20"] { color: var(--orange); border-color: var(--orange-dark); box-shadow: 0 4px 0 var(--orange-dark); }
-  .count-btn[data-count="20"]:active { box-shadow: 0 2px 0 var(--orange-dark); }
+  .count-btn:hover {
+    border-color: var(--text);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  .count-btn:active { transform: translateY(0); }
 
   .count-btn .count-num {
     font-family: var(--font-heading);
-    font-size: 44px;
-    font-weight: 900;
+    font-size: 32px;
+    font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1;
     display: inline-block;
     font-variant-numeric: tabular-nums;
+    color: var(--text);
   }
   .count-btn .count-unit {
-    font-size: 16px;
-    font-weight: 900;
-    margin-left: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 3px;
+    color: var(--text-sub);
   }
   .count-btn .count-desc {
     margin-top: 8px;
     font-size: 12px;
     color: var(--text-sub);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-weight: 500;
+    letter-spacing: 0;
   }
 
-  /* ===== 章ピル（Duolingo風・章ごとカラー） ===== */
+  /* ===== 章ピル ===== */
   .pill-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
   .pill {
-    padding: 10px 16px;
-    border: 2px solid var(--border);
+    padding: 7px 14px;
+    border: 1px solid var(--border);
     background: var(--surface);
-    border-radius: 999px;
+    border-radius: 6px;
     font-size: 13px;
-    font-weight: 800;
-    color: var(--text-sub);
+    font-weight: 500;
+    color: var(--text-2);
     cursor: pointer;
-    transition: transform 0.08s var(--ease);
+    transition: all 0.15s var(--ease);
     font-family: inherit;
-    letter-spacing: 0.02em;
-    box-shadow: 0 3px 0 var(--border);
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
   }
-  .pill:hover { filter: brightness(1.03); }
-  .pill:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--border); }
+  .pill:hover { border-color: var(--text); color: var(--text); }
+  .pill.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    font-weight: 600;
+  }
 
-  .pill[data-chapter="all"].active { background: var(--primary); border-color: var(--primary-dark); color: white; box-shadow: 0 3px 0 var(--primary-dark); }
-  .pill[data-chapter="1"].active { background: var(--primary); border-color: var(--primary-dark); color: white; box-shadow: 0 3px 0 var(--primary-dark); }
-  .pill[data-chapter="2"].active { background: var(--purple); border-color: var(--purple-dark); color: white; box-shadow: 0 3px 0 var(--purple-dark); }
-  .pill[data-chapter="3"].active { background: var(--orange); border-color: var(--orange-dark); color: white; box-shadow: 0 3px 0 var(--orange-dark); }
-  .pill[data-chapter="4"].active { background: var(--pink); border-color: var(--pink-dark); color: white; box-shadow: 0 3px 0 var(--pink-dark); }
-  .pill[data-chapter="5"].active { background: var(--blue); border-color: var(--blue-dark); color: white; box-shadow: 0 3px 0 var(--blue-dark); }
-  .pill[data-chapter="6"].active { background: var(--yellow); border-color: var(--yellow-dark); color: var(--text); box-shadow: 0 3px 0 var(--yellow-dark); }
-  .pill[data-chapter="7"].active { background: var(--purple); border-color: var(--purple-dark); color: white; box-shadow: 0 3px 0 var(--purple-dark); }
-
-  /* ===== ボタン（Duolingo風ソリッド影） ===== */
+  /* ===== ボタン ===== */
   button {
-    border: 2px solid var(--primary-dark);
-    padding: 12px 20px;
-    border-radius: var(--radius);
+    border: 1px solid var(--primary);
+    padding: 10px 18px;
+    border-radius: 8px;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 500;
     cursor: pointer;
-    transition: transform 0.08s var(--ease), box-shadow 0.08s var(--ease);
+    transition: all 0.15s var(--ease);
     background: var(--primary);
     color: white;
     font-family: inherit;
-    letter-spacing: 0.02em;
+    letter-spacing: 0;
     line-height: 1.4;
-    box-shadow: 0 4px 0 var(--primary-dark);
-    text-transform: uppercase;
+    text-transform: none;
   }
   button:hover:not(:disabled) {
-    filter: brightness(1.05);
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
   }
-  button:active:not(:disabled) {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 var(--primary-dark);
-  }
-  button:disabled { opacity: 0.45; cursor: not-allowed; }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
   button.secondary {
     background: var(--surface);
-    color: var(--text-sub);
-    border: 2px solid var(--border);
-    box-shadow: 0 4px 0 var(--border);
+    color: var(--text);
+    border: 1px solid var(--border);
   }
   button.secondary:hover:not(:disabled) {
-    background: var(--surface-2);
-  }
-  button.secondary:active:not(:disabled) {
-    box-shadow: 0 2px 0 var(--border);
+    border-color: var(--text);
+    background: var(--surface);
   }
   button.ghost {
     background: transparent;
     color: var(--text-sub);
-    border: 2px solid transparent;
-    padding: 10px 14px;
-    box-shadow: none;
+    border: 1px solid transparent;
+    padding: 8px 12px;
     text-transform: none;
     letter-spacing: 0;
   }
   button.ghost:hover:not(:disabled) {
     background: var(--surface-2);
     color: var(--text);
-    filter: none;
-  }
-  button.ghost:active:not(:disabled) {
-    transform: none;
-    box-shadow: none;
   }
   button.large {
-    padding: 16px 28px;
+    padding: 14px 24px;
     font-size: 15px;
   }
   .btn-group {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
   }
 
   /* ===== 問題画面 ===== */
   .question-card {
-    padding: 36px;
-    box-shadow: var(--shadow-sm);
+    padding: 40px;
   }
   @media (max-width: 540px) { .question-card { padding: 24px; } }
 
@@ -444,54 +387,53 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
   .q-number {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-sub);
-    font-weight: 700;
-    letter-spacing: 0.10em;
+    font-weight: 500;
+    letter-spacing: 0;
     font-variant-numeric: tabular-nums;
-    text-transform: uppercase;
+    text-transform: none;
   }
   .progress-bar {
-    height: 14px;
+    height: 4px;
     background: var(--surface-2);
     border-radius: 999px;
     overflow: hidden;
     margin-bottom: 32px;
-    border: 2px solid var(--border);
   }
   .progress-fill {
     height: 100%;
-    background: var(--primary);
+    background: var(--text);
     transition: width 0.5s var(--ease);
     border-radius: 999px;
-    position: relative;
-    box-shadow: inset 0 -4px 0 rgba(0,0,0,0.12), inset 0 4px 0 rgba(255,255,255,0.25);
   }
   .question-text {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.85;
     margin-bottom: 28px;
     white-space: pre-wrap;
     word-break: break-word;
     color: var(--text);
-    letter-spacing: -0.005em;
+    font-weight: 500;
+    letter-spacing: 0.005em;
   }
   .question-text p { margin: 0 0 12px; }
   pre.code-block {
     font-family: var(--font-mono);
     font-size: 13px;
-    background: #0F172A;
-    color: #E2E8F0;
+    background: #FAFAFA;
+    color: var(--text);
     padding: 18px 20px;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius);
     overflow-x: auto;
     margin: 16px 0;
     line-height: 1.7;
     letter-spacing: 0;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    font-weight: 400;
   }
 
   /* ===== 選択肢 ===== */
@@ -506,79 +448,75 @@
     align-items: flex-start;
     gap: 14px;
     padding: 16px 18px;
-    border: 2px solid var(--border);
-    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     cursor: pointer;
-    transition: transform 0.08s var(--ease);
+    transition: all 0.15s var(--ease);
     background: var(--surface);
-    box-shadow: 0 3px 0 var(--border);
   }
-  .choice:hover:not(.disabled) { filter: brightness(1.02); }
-  .choice:active:not(.disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--border); }
+  .choice:hover:not(.disabled) { border-color: var(--text); }
   .choice.selected {
-    border-color: var(--blue-dark);
-    background: var(--blue-soft);
-    box-shadow: 0 3px 0 var(--blue-dark);
+    border-color: var(--accent);
+    background: var(--accent-softer);
   }
   .choice.correct {
-    border-color: var(--primary-dark);
-    background: var(--success-bg);
-    box-shadow: 0 3px 0 var(--primary-dark);
+    border-color: var(--success);
+    background: var(--success-softer);
   }
   .choice.incorrect {
-    border-color: var(--pink-dark);
-    background: var(--danger-bg);
-    box-shadow: 0 3px 0 var(--pink-dark);
+    border-color: var(--danger);
+    background: var(--danger-softer);
   }
   .choice.disabled { cursor: default; }
   .choice-label {
     display: grid;
     place-items: center;
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-weight: 900;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-weight: 600;
     color: var(--text-sub);
-    font-size: 13px;
+    font-size: 12px;
     flex-shrink: 0;
-    margin-top: 0;
-    transition: all 0.1s var(--ease);
+    margin-top: 2px;
+    transition: all 0.15s var(--ease);
   }
-  .choice:hover:not(.disabled) .choice-label,
+  .choice:hover:not(.disabled) .choice-label { border-color: var(--text); color: var(--text); }
   .choice.selected .choice-label {
-    background: var(--blue);
-    border-color: var(--blue-dark);
+    background: var(--accent);
+    border-color: var(--accent);
     color: white;
   }
   .choice.correct .choice-label {
-    background: var(--primary);
-    border-color: var(--primary-dark);
+    background: var(--success);
+    border-color: var(--success);
     color: white;
   }
   .choice.incorrect .choice-label {
-    background: var(--pink);
-    border-color: var(--pink-dark);
+    background: var(--danger);
+    border-color: var(--danger);
     color: white;
   }
   .choice-text {
     flex: 1;
     white-space: pre-wrap;
     word-break: break-word;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text);
-    letter-spacing: -0.005em;
+    letter-spacing: 0.005em;
     line-height: 1.65;
-    padding-top: 2px;
+    padding-top: 1px;
+    font-weight: 400;
   }
 
   /* ===== 解説 ===== */
   .explanation {
-    margin-top: 22px;
-    padding: 22px;
+    margin-top: 24px;
+    padding: 24px;
     background: var(--surface-2);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius);
     border: 1px solid var(--border);
     animation: fadeIn 0.3s var(--ease);
   }
@@ -587,30 +525,30 @@
     to { opacity: 1; transform: translateY(0); }
   }
   .explanation.correct {
-    background: var(--success-bg);
-    border-color: var(--success-border);
+    background: var(--success-softer);
+    border-color: var(--success-soft);
   }
   .explanation.incorrect {
-    background: var(--danger-bg);
-    border-color: var(--danger-border);
+    background: var(--danger-softer);
+    border-color: var(--danger-soft);
   }
   .result-judge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 16px;
-    letter-spacing: -0.005em;
+    letter-spacing: 0;
   }
   .result-judge .badge-icon {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     display: grid;
     place-items: center;
     color: white;
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 700;
     line-height: 1;
   }
@@ -619,34 +557,34 @@
   .result-judge.incorrect { color: var(--danger); }
   .result-judge.incorrect .badge-icon { background: var(--danger); }
   .exp-label {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--text-sub);
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
+    letter-spacing: 0;
     margin: 18px 0 8px;
   }
   .exp-label:first-of-type { margin-top: 0; }
   .exp-text {
     font-size: 14px;
-    line-height: 1.75;
+    line-height: 1.8;
     color: var(--text);
-    letter-spacing: -0.005em;
+    letter-spacing: 0.005em;
+    font-weight: 400;
   }
   .detail-toggle {
     margin-top: 16px;
     font-size: 13px;
-    color: var(--primary);
+    color: var(--accent);
     cursor: pointer;
     user-select: none;
-    font-weight: 600;
+    font-weight: 500;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 0;
+    padding: 4px 0;
     transition: color 0.15s;
   }
-  .detail-toggle:hover { color: var(--primary-dark); }
+  .detail-toggle:hover { color: var(--accent-hover); }
   .detail-content {
     margin-top: 10px;
     padding: 16px 18px;
@@ -656,8 +594,8 @@
     display: none;
     font-size: 13px;
     color: var(--text-2);
-    line-height: 1.8;
-    letter-spacing: -0.003em;
+    line-height: 1.85;
+    letter-spacing: 0.005em;
   }
   .detail-content.show {
     display: block;
@@ -689,33 +627,22 @@
   /* ===== 結果画面 ===== */
   .score-card {
     background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: 44px 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 32px;
     text-align: center;
     margin-bottom: 28px;
-    box-shadow: 0 4px 0 var(--border);
     position: relative;
     overflow: hidden;
   }
-  .score-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top, var(--primary-softer) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .score-card.high::before { background: radial-gradient(circle at top, var(--success-bg) 0%, transparent 60%); }
-  .score-card.mid::before { background: radial-gradient(circle at top, var(--warning-bg) 0%, transparent 60%); }
-  .score-card.low::before { background: radial-gradient(circle at top, var(--danger-bg) 0%, transparent 60%); }
   .score-card > * { position: relative; }
 
   /* 円形プログレス */
   .score-ring-wrap {
     position: relative;
-    width: 180px;
-    height: 180px;
-    margin: 0 auto 18px;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 20px;
   }
   .score-ring {
     transform: rotate(-90deg);
@@ -725,12 +652,12 @@
   .score-ring-bg {
     fill: none;
     stroke: var(--surface-2);
-    stroke-width: 14;
+    stroke-width: 8;
   }
   .score-ring-fg {
     fill: none;
-    stroke: var(--primary);
-    stroke-width: 14;
+    stroke: var(--text);
+    stroke-width: 8;
     stroke-linecap: round;
     transition: stroke-dasharray 0.9s var(--ease);
   }
@@ -745,7 +672,7 @@
   }
   .score-value {
     font-family: var(--font-heading);
-    font-size: 52px;
+    font-size: 44px;
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.03em;
@@ -753,31 +680,24 @@
     font-variant-numeric: tabular-nums;
   }
   .score-value .unit {
-    font-size: 22px;
+    font-size: 18px;
     color: var(--text-sub);
-    font-weight: 700;
+    font-weight: 500;
     margin-left: 2px;
   }
   .score-label {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-sub);
-    font-weight: 700;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin-bottom: 8px;
   }
   .score-detail {
     margin-top: 4px;
-    font-size: 15px;
-    color: var(--text-2);
-    letter-spacing: -0.005em;
-    font-weight: 500;
-  }
-  .score-comment {
-    margin-top: 12px;
     font-size: 14px;
-    color: var(--text-sub);
-    letter-spacing: -0.005em;
+    color: var(--text-2);
+    letter-spacing: 0;
+    font-weight: 400;
   }
 
   /* ===== 章別結果 ===== */
@@ -816,12 +736,13 @@
     transition: width 0.8s var(--ease);
   }
   .rate {
-    font-weight: 600;
+    font-weight: 500;
     min-width: 76px;
     text-align: right;
     font-size: 13px;
     font-variant-numeric: tabular-nums;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
+    color: var(--text-2);
   }
   .rate.high { color: var(--success); }
   .rate.mid { color: var(--warning); }
@@ -885,74 +806,76 @@
   }
   .mode-card {
     cursor: pointer;
-    padding: 24px 22px;
-    border-radius: var(--radius-xl);
+    padding: 22px 22px 20px;
+    border-radius: var(--radius-lg);
     text-align: left;
-    transition: transform 0.08s var(--ease);
+    transition: all 0.2s var(--ease);
     font-family: inherit;
-    border: 2px solid var(--border);
+    border: 1px solid var(--border);
     background: var(--surface);
-    box-shadow: 0 4px 0 var(--border);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 2px;
     text-transform: none;
     letter-spacing: 0;
     color: var(--text);
+    min-height: 148px;
   }
-  .mode-card:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--border); }
+  .mode-card:hover {
+    border-color: var(--text);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
   .mode-card.learn {
-    background: var(--purple-soft);
-    border-color: var(--purple-dark);
-    box-shadow: 0 4px 0 var(--purple-dark);
-    color: var(--purple-dark);
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
   }
-  .mode-card.learn:active { box-shadow: 0 2px 0 var(--purple-dark); }
-  .mode-card.quiz {
-    background: var(--primary-soft);
-    border-color: var(--primary-dark);
-    box-shadow: 0 4px 0 var(--primary-dark);
-    color: var(--primary-darker);
+  .mode-card.learn:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
   }
-  .mode-card.quiz:active { box-shadow: 0 2px 0 var(--primary-dark); }
   .mode-icon {
-    font-size: 28px;
-    line-height: 1;
-    margin-bottom: 4px;
+    width: 22px;
+    height: 22px;
+    margin-bottom: 12px;
+    color: currentColor;
   }
   .mode-title {
     font-family: var(--font-heading);
-    font-size: 18px;
-    font-weight: 900;
+    font-size: 17px;
+    font-weight: 600;
     letter-spacing: -0.01em;
+    line-height: 1.3;
   }
   .mode-desc {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 400;
     color: var(--text-sub);
     letter-spacing: 0;
-    line-height: 1.5;
+    line-height: 1.55;
+    margin-top: 4px;
   }
-  .mode-card.learn .mode-desc { color: var(--purple-dark); opacity: 0.8; }
-  .mode-card.quiz .mode-desc { color: var(--primary-darker); opacity: 0.8; }
+  .mode-card.learn .mode-desc { color: rgba(255, 255, 255, 0.72); }
 
   .breadcrumb {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 800;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 400;
     color: var(--text-sub);
-    margin-bottom: 18px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 0;
+    text-transform: none;
   }
   .breadcrumb a {
     color: var(--text-sub);
     cursor: pointer;
     text-decoration: none;
+    transition: color 0.15s;
   }
-  .breadcrumb a:hover { color: var(--primary-darker); }
+  .breadcrumb a:hover { color: var(--text); }
   .breadcrumb .sep { color: var(--text-weak); }
 
   .chapter-card-list {
@@ -962,12 +885,11 @@
   }
   .chapter-card {
     cursor: pointer;
-    padding: 20px 22px;
-    border-radius: var(--radius-xl);
-    border: 2px solid var(--border);
+    padding: 18px 22px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
     background: var(--surface);
-    box-shadow: 0 4px 0 var(--border);
-    transition: transform 0.08s var(--ease);
+    transition: all 0.15s var(--ease);
     display: flex;
     align-items: center;
     gap: 18px;
@@ -978,43 +900,66 @@
     letter-spacing: 0;
     color: var(--text);
   }
-  .chapter-card:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--border); }
+  .chapter-card:hover:not(:disabled) {
+    border-color: var(--text);
+    background: var(--surface);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
   .chapter-card .chip {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     display: grid;
     place-items: center;
     font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 20px;
-    color: white;
-    border: 2px solid transparent;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-2);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    letter-spacing: 0;
   }
-  .chapter-card[data-ch="1"] .chip { background: var(--primary); border-color: var(--primary-dark); box-shadow: 0 3px 0 var(--primary-dark); }
-  .chapter-card[data-ch="2"] .chip { background: var(--purple); border-color: var(--purple-dark); box-shadow: 0 3px 0 var(--purple-dark); }
-  .chapter-card[data-ch="3"] .chip { background: var(--orange); border-color: var(--orange-dark); box-shadow: 0 3px 0 var(--orange-dark); }
-  .chapter-card[data-ch="4"] .chip { background: var(--pink); border-color: var(--pink-dark); box-shadow: 0 3px 0 var(--pink-dark); }
-  .chapter-card[data-ch="5"] .chip { background: var(--blue); border-color: var(--blue-dark); box-shadow: 0 3px 0 var(--blue-dark); }
-  .chapter-card[data-ch="6"] .chip { background: var(--yellow); border-color: var(--yellow-dark); color: var(--text); box-shadow: 0 3px 0 var(--yellow-dark); }
-  .chapter-card[data-ch="7"] .chip { background: var(--purple); border-color: var(--purple-dark); box-shadow: 0 3px 0 var(--purple-dark); }
+  .chapter-card:hover .chip {
+    background: var(--text);
+    color: white;
+    border-color: var(--text);
+  }
   .chapter-card .body {
     flex: 1;
     min-width: 0;
   }
   .chapter-card .title {
     font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 16px;
-    letter-spacing: -0.01em;
-    margin-bottom: 3px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
     color: var(--text);
+    line-height: 1.4;
   }
   .chapter-card .meta {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 400;
     color: var(--text-sub);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .chapter-card .mini-bar {
+    width: 64px;
+    height: 6px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .chapter-card .mini-bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 999px;
+    transition: width 0.6s var(--ease);
   }
   .chapter-card .arrow {
     color: var(--text-weak);
@@ -1030,12 +975,11 @@
   }
   .topic-card {
     cursor: pointer;
-    padding: 16px 20px;
-    border-radius: var(--radius-lg);
-    border: 2px solid var(--border);
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
     background: var(--surface);
-    box-shadow: 0 3px 0 var(--border);
-    transition: transform 0.08s var(--ease);
+    transition: all 0.15s var(--ease);
     font-family: inherit;
     width: 100%;
     text-align: left;
@@ -1046,36 +990,57 @@
     align-items: flex-start;
     gap: 14px;
   }
-  .topic-card:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--border); }
+  .topic-card:hover:not(:disabled) {
+    background: var(--surface);
+    border-color: var(--text-2);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+  }
+  .topic-card:hover:not(:disabled) .num {
+    background: var(--accent-softer);
+    color: var(--accent);
+  }
   .topic-card .num {
     flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
     background: var(--surface-2);
-    border: 2px solid var(--border);
     display: grid;
     place-items: center;
     font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 13px;
+    font-weight: 500;
+    font-size: 12px;
     color: var(--text-sub);
+    margin-top: 1px;
   }
   .topic-card .body { flex: 1; min-width: 0; }
   .topic-card .title {
     font-family: var(--font-heading);
-    font-weight: 900;
+    font-weight: 500;
     font-size: 15px;
     color: var(--text);
     margin-bottom: 4px;
-    line-height: 1.4;
+    line-height: 1.45;
     letter-spacing: -0.005em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topic-card .title .check {
+    color: var(--success);
+    font-size: 14px;
+    line-height: 1;
+  }
+  .topic-card.done .num {
+    background: var(--success);
+    color: white;
   }
   .topic-card .summary {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 400;
     color: var(--text-sub);
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   /* ===== レッスン詳細 ===== */
@@ -1084,78 +1049,62 @@
   }
   .lesson-header h1 {
     font-family: var(--font-heading);
-    font-size: 26px;
-    font-weight: 900;
-    letter-spacing: -0.02em;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.024em;
     line-height: 1.25;
-    margin: 0 0 12px;
+    margin: 0 0 14px;
     color: var(--text);
   }
   .lesson-summary {
     padding: 18px 22px;
-    background: var(--purple-soft);
-    border: 2px solid var(--purple-dark);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 3px 0 var(--purple-dark);
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--purple-dark);
-    font-weight: 700;
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text-2);
+    font-weight: 400;
+    margin-bottom: 8px;
   }
   .lesson-section {
-    margin-top: 28px;
-    padding: 22px 24px;
-    background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 3px 0 var(--border);
+    margin-top: 32px;
   }
   .lesson-section h2 {
     font-family: var(--font-heading);
-    font-size: 17px;
-    font-weight: 900;
-    letter-spacing: -0.01em;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
     margin: 0 0 12px;
     color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .lesson-section h2::before {
-    content: '';
-    width: 4px;
-    height: 20px;
-    background: var(--primary);
-    border-radius: 2px;
+    line-height: 1.4;
   }
   .lesson-section p {
     margin: 0;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.85;
-    color: var(--text);
-    font-weight: 600;
-    letter-spacing: -0.003em;
+    color: var(--text-2);
+    font-weight: 400;
+    letter-spacing: 0.005em;
   }
   .lesson-section pre.code-block {
     margin-top: 14px;
   }
 
   .points-box {
-    margin-top: 24px;
+    margin-top: 32px;
     padding: 22px 24px;
-    background: var(--success-bg);
-    border: 2px solid var(--primary-dark);
+    background: var(--success-softer);
+    border: 1px solid var(--success-soft);
     border-radius: var(--radius-lg);
-    box-shadow: 0 3px 0 var(--primary-dark);
   }
   .points-box h3 {
     font-family: var(--font-heading);
-    font-size: 15px;
-    font-weight: 900;
-    color: var(--primary-darker);
-    margin: 0 0 12px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--success);
+    margin: 0 0 14px;
+    letter-spacing: 0;
+    text-transform: none;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1166,48 +1115,43 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
   .points-box li {
-    padding-left: 26px;
+    padding-left: 28px;
     position: relative;
     font-size: 14px;
     line-height: 1.7;
     color: var(--text);
-    font-weight: 700;
+    font-weight: 400;
   }
   .points-box li::before {
-    content: '✓';
+    content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 20px;
-    height: 20px;
-    background: var(--primary);
-    color: white;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-size: 12px;
-    font-weight: 900;
+    left: 2px;
+    top: 7px;
+    width: 14px;
+    height: 8px;
+    border-left: 2px solid var(--success);
+    border-bottom: 2px solid var(--success);
+    transform: rotate(-45deg);
   }
 
   .pitfalls-box {
-    margin-top: 18px;
+    margin-top: 14px;
     padding: 22px 24px;
-    background: var(--warning-bg);
-    border: 2px solid var(--orange-dark);
+    background: var(--warning-softer);
+    border: 1px solid var(--warning-soft);
     border-radius: var(--radius-lg);
-    box-shadow: 0 3px 0 var(--orange-dark);
   }
   .pitfalls-box h3 {
     font-family: var(--font-heading);
-    font-size: 15px;
-    font-weight: 900;
-    color: var(--orange-dark);
-    margin: 0 0 12px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--warning);
+    margin: 0 0 14px;
+    letter-spacing: 0;
+    text-transform: none;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1218,36 +1162,45 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
   .pitfalls-box li {
-    padding-left: 26px;
+    padding-left: 28px;
     position: relative;
     font-size: 14px;
     line-height: 1.7;
     color: var(--text);
-    font-weight: 700;
+    font-weight: 400;
   }
   .pitfalls-box li::before {
-    content: '!';
+    content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 20px;
-    height: 20px;
-    background: var(--orange);
-    color: white;
+    left: 7px;
+    top: 5px;
+    width: 4px;
+    height: 13px;
+    background: var(--warning);
+    border-radius: 2px;
+    box-shadow: 0 15px 0 var(--warning);
+    height: 11px;
+  }
+  .pitfalls-box li::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 21px;
+    width: 4px;
+    height: 4px;
+    background: var(--warning);
     border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-size: 12px;
-    font-weight: 900;
   }
 
   .lesson-nav {
-    margin-top: 32px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: space-between;
     flex-wrap: wrap;
   }
@@ -1276,8 +1229,10 @@
 <body>
 <header>
   <div class="brand">
-    <div class="brand-mark">JS</div>
-    <span>Java Silver<span class="brand-sub">Practice</span></span>
+    <div class="brand-mark">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3.5A1 1 0 0 1 4 2.5h13v15H4a1 1 0 0 1-1-1v-13z"/><path d="M3 16.5A1 1 0 0 1 4 15.5h13"/></svg>
+    </div>
+    <span>Java Silver<span class="brand-sub">SE 17</span></span>
   </div>
   <div class="header-right">
     <span id="chapter-indicator">ホーム</span>
@@ -1319,11 +1274,28 @@
     return {
       starred: [], lastIncorrect: [],
       totalAnswered: 0, totalCorrect: 0,
-      timerEnabled: true, selectedChapter: 'all'
+      timerEnabled: true, selectedChapter: 'all',
+      learnedTopics: [], lastTopic: null
     };
   }
+  // 互換性: 既存stateへの追加フィールド補完
+  if (!Array.isArray(state?.learnedTopics)) state.learnedTopics = [];
   function saveState() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function markTopicLearned(id) {
+    if (!state.learnedTopics.includes(id)) {
+      state.learnedTopics.push(id);
+    }
+    state.lastTopic = id;
+    saveState();
+  }
+
+  function chapterProgress(ch) {
+    const total = LESSONS.filter(l => l.chapter === ch).length;
+    const done = LESSONS.filter(l => l.chapter === ch && state.learnedTopics.includes(l.id)).length;
+    return { done, total, pct: total ? Math.round((done / total) * 100) : 0 };
   }
 
   let session = null;
@@ -1422,14 +1394,14 @@
         <div class="section-label">学習モード</div>
         <div class="mode-grid">
           <button class="mode-card learn" id="btn-learn">
-            <div class="mode-icon">📘</div>
+            <svg class="mode-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v18H5.5A1.5 1.5 0 0 1 4 19.5v-15z"/><path d="M4 19.5A1.5 1.5 0 0 1 5.5 18H20"/></svg>
             <div class="mode-title">教科書で学ぶ</div>
-            <div class="mode-desc">基礎知識を章ごとに学ぶ · 全40トピック</div>
+            <div class="mode-desc">基礎知識を章ごとに · 全40トピック</div>
           </button>
           <button class="mode-card quiz" id="btn-quiz-mode">
-            <div class="mode-icon">✏️</div>
+            <svg class="mode-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
             <div class="mode-title">問題を解く</div>
-            <div class="mode-desc">下のメニューから問題数を選択</div>
+            <div class="mode-desc">175問から選んで実戦練習</div>
           </button>
         </div>
       </section>
@@ -1553,13 +1525,17 @@
     stopTimer();
     setChapterIndicator('教科書');
     const chapterCards = Object.keys(CHAPTER_NAMES).map(ch => {
-      const topics = LESSONS.filter(l => l.chapter === parseInt(ch, 10));
+      const p = chapterProgress(parseInt(ch, 10));
+      const isDone = p.done === p.total && p.total > 0;
       return `
-        <button class="chapter-card" data-ch="${ch}">
+        <button class="chapter-card ${isDone ? 'done' : ''}" data-ch="${ch}">
           <div class="chip">${ch}</div>
           <div class="body">
             <div class="title">${escapeHtml(CHAPTER_NAMES[ch])}</div>
-            <div class="meta">${topics.length} トピック</div>
+            <div class="meta">
+              <span>${p.done} / ${p.total}</span>
+              <div class="mini-bar"><div class="mini-bar-fill" style="width:${p.pct}%;"></div></div>
+            </div>
           </div>
           <div class="arrow">›</div>
         </button>
@@ -1594,15 +1570,18 @@
     stopTimer();
     setChapterIndicator(CHAPTER_NAMES[chapter]);
     const topics = LESSONS.filter(l => l.chapter === chapter);
-    const topicHtml = topics.map((t, i) => `
-      <button class="topic-card" data-id="${t.id}">
-        <div class="num">${i + 1}</div>
+    const topicHtml = topics.map((t, i) => {
+      const done = state.learnedTopics.includes(t.id);
+      return `
+      <button class="topic-card ${done ? 'done' : ''}" data-id="${t.id}">
+        <div class="num">${done ? '✓' : (i + 1)}</div>
         <div class="body">
           <div class="title">${escapeHtml(t.title)}</div>
           <div class="summary">${escapeHtml(t.summary)}</div>
         </div>
       </button>
-    `).join('');
+    `;
+    }).join('');
 
     render(`
       <div class="breadcrumb">
@@ -1660,14 +1639,14 @@
 
     const pointsHtml = topic.points && topic.points.length ? `
       <div class="points-box">
-        <h3>🎯 要点</h3>
+        <h3>要点</h3>
         <ul>${topic.points.map(p => `<li>${escapeHtml(p)}</li>`).join('')}</ul>
       </div>
     ` : '';
 
     const pitfallsHtml = topic.pitfalls && topic.pitfalls.length ? `
       <div class="pitfalls-box">
-        <h3>⚠️ ひっかかりやすいポイント</h3>
+        <h3>ひっかかりやすいポイント</h3>
         <ul>${topic.pitfalls.map(p => `<li>${escapeHtml(p)}</li>`).join('')}</ul>
       </div>
     ` : '';
@@ -1704,6 +1683,8 @@
         </div>
       </div>
     `);
+
+    markTopicLearned(topic.id);
 
     document.getElementById('crumb-home').addEventListener('click', renderHome);
     document.getElementById('crumb-learn').addEventListener('click', renderLearnHome);
