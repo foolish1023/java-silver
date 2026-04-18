@@ -877,6 +877,386 @@
   }
   .switch.on::after { transform: translateX(18px); }
 
+  /* ===== 学習モード ===== */
+  .mode-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .mode-card {
+    cursor: pointer;
+    padding: 24px 22px;
+    border-radius: var(--radius-xl);
+    text-align: left;
+    transition: transform 0.08s var(--ease);
+    font-family: inherit;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    box-shadow: 0 4px 0 var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text);
+  }
+  .mode-card:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--border); }
+  .mode-card.learn {
+    background: var(--purple-soft);
+    border-color: var(--purple-dark);
+    box-shadow: 0 4px 0 var(--purple-dark);
+    color: var(--purple-dark);
+  }
+  .mode-card.learn:active { box-shadow: 0 2px 0 var(--purple-dark); }
+  .mode-card.quiz {
+    background: var(--primary-soft);
+    border-color: var(--primary-dark);
+    box-shadow: 0 4px 0 var(--primary-dark);
+    color: var(--primary-darker);
+  }
+  .mode-card.quiz:active { box-shadow: 0 2px 0 var(--primary-dark); }
+  .mode-icon {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .mode-title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+  }
+  .mode-desc {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-sub);
+    letter-spacing: 0;
+    line-height: 1.5;
+  }
+  .mode-card.learn .mode-desc { color: var(--purple-dark); opacity: 0.8; }
+  .mode-card.quiz .mode-desc { color: var(--primary-darker); opacity: 0.8; }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-sub);
+    margin-bottom: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .breadcrumb a {
+    color: var(--text-sub);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .breadcrumb a:hover { color: var(--primary-darker); }
+  .breadcrumb .sep { color: var(--text-weak); }
+
+  .chapter-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .chapter-card {
+    cursor: pointer;
+    padding: 20px 22px;
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--border);
+    background: var(--surface);
+    box-shadow: 0 4px 0 var(--border);
+    transition: transform 0.08s var(--ease);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-family: inherit;
+    width: 100%;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text);
+  }
+  .chapter-card:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--border); }
+  .chapter-card .chip {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 20px;
+    color: white;
+    border: 2px solid transparent;
+  }
+  .chapter-card[data-ch="1"] .chip { background: var(--primary); border-color: var(--primary-dark); box-shadow: 0 3px 0 var(--primary-dark); }
+  .chapter-card[data-ch="2"] .chip { background: var(--purple); border-color: var(--purple-dark); box-shadow: 0 3px 0 var(--purple-dark); }
+  .chapter-card[data-ch="3"] .chip { background: var(--orange); border-color: var(--orange-dark); box-shadow: 0 3px 0 var(--orange-dark); }
+  .chapter-card[data-ch="4"] .chip { background: var(--pink); border-color: var(--pink-dark); box-shadow: 0 3px 0 var(--pink-dark); }
+  .chapter-card[data-ch="5"] .chip { background: var(--blue); border-color: var(--blue-dark); box-shadow: 0 3px 0 var(--blue-dark); }
+  .chapter-card[data-ch="6"] .chip { background: var(--yellow); border-color: var(--yellow-dark); color: var(--text); box-shadow: 0 3px 0 var(--yellow-dark); }
+  .chapter-card[data-ch="7"] .chip { background: var(--purple); border-color: var(--purple-dark); box-shadow: 0 3px 0 var(--purple-dark); }
+  .chapter-card .body {
+    flex: 1;
+    min-width: 0;
+  }
+  .chapter-card .title {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    margin-bottom: 3px;
+    color: var(--text);
+  }
+  .chapter-card .meta {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-sub);
+  }
+  .chapter-card .arrow {
+    color: var(--text-weak);
+    font-weight: 900;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .topic-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .topic-card {
+    cursor: pointer;
+    padding: 16px 20px;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border);
+    background: var(--surface);
+    box-shadow: 0 3px 0 var(--border);
+    transition: transform 0.08s var(--ease);
+    font-family: inherit;
+    width: 100%;
+    text-align: left;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .topic-card:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--border); }
+  .topic-card .num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--surface-2);
+    border: 2px solid var(--border);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 13px;
+    color: var(--text-sub);
+  }
+  .topic-card .body { flex: 1; min-width: 0; }
+  .topic-card .title {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 4px;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+  }
+  .topic-card .summary {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-sub);
+    line-height: 1.6;
+  }
+
+  /* ===== レッスン詳細 ===== */
+  .lesson-header {
+    margin-bottom: 28px;
+  }
+  .lesson-header h1 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin: 0 0 12px;
+    color: var(--text);
+  }
+  .lesson-summary {
+    padding: 18px 22px;
+    background: var(--purple-soft);
+    border: 2px solid var(--purple-dark);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 3px 0 var(--purple-dark);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--purple-dark);
+    font-weight: 700;
+  }
+  .lesson-section {
+    margin-top: 28px;
+    padding: 22px 24px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 3px 0 var(--border);
+  }
+  .lesson-section h2 {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .lesson-section h2::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+  .lesson-section p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: -0.003em;
+  }
+  .lesson-section pre.code-block {
+    margin-top: 14px;
+  }
+
+  .points-box {
+    margin-top: 24px;
+    padding: 22px 24px;
+    background: var(--success-bg);
+    border: 2px solid var(--primary-dark);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 3px 0 var(--primary-dark);
+  }
+  .points-box h3 {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--primary-darker);
+    margin: 0 0 12px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .points-box ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .points-box li {
+    padding-left: 26px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    font-weight: 700;
+  }
+  .points-box li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  .pitfalls-box {
+    margin-top: 18px;
+    padding: 22px 24px;
+    background: var(--warning-bg);
+    border: 2px solid var(--orange-dark);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 3px 0 var(--orange-dark);
+  }
+  .pitfalls-box h3 {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--orange-dark);
+    margin: 0 0 12px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pitfalls-box ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pitfalls-box li {
+    padding-left: 26px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    font-weight: 700;
+  }
+  .pitfalls-box li::before {
+    content: '!';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--orange);
+    color: white;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  .lesson-nav {
+    margin-top: 32px;
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .lesson-nav .group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
   /* ===== レスポンシブ ===== */
   @media (max-width: 620px) {
     main { padding: 36px 18px 64px; }
@@ -908,6 +1288,7 @@
 <main id="app"></main>
 
 <script src="questions.js"></script>
+<script src="lessons.js"></script>
 <script>
 (() => {
   'use strict';
@@ -1033,9 +1414,25 @@
 
     render(`
       <div class="page-title">
-        <h1>練習を始める</h1>
-        <p>Java Silver SE 17（1Z0-825）対策 · 175問収録</p>
+        <h1>Java Silverを学ぶ</h1>
+        <p>Java Silver SE 17（1Z0-825）対策 · 教科書40トピック + 練習問題175問</p>
       </div>
+
+      <section>
+        <div class="section-label">学習モード</div>
+        <div class="mode-grid">
+          <button class="mode-card learn" id="btn-learn">
+            <div class="mode-icon">📘</div>
+            <div class="mode-title">教科書で学ぶ</div>
+            <div class="mode-desc">基礎知識を章ごとに学ぶ · 全40トピック</div>
+          </button>
+          <button class="mode-card quiz" id="btn-quiz-mode">
+            <div class="mode-icon">✏️</div>
+            <div class="mode-title">問題を解く</div>
+            <div class="mode-desc">下のメニューから問題数を選択</div>
+          </button>
+        </div>
+      </section>
 
       <section>
         <div class="stats-grid">
@@ -1110,6 +1507,11 @@
       </section>
     `);
 
+    document.getElementById('btn-learn').addEventListener('click', renderLearnHome);
+    document.getElementById('btn-quiz-mode').addEventListener('click', () => {
+      const target = document.querySelector('.count-grid');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
     app.querySelectorAll('#chapter-pills .pill').forEach(btn => {
       btn.addEventListener('click', () => {
         state.selectedChapter = btn.dataset.chapter;
@@ -1141,6 +1543,182 @@
         renderHome();
       }
     });
+  }
+
+  function renderLessonBody(text) {
+    return escapeHtml(text).replace(/\n/g, '<br>');
+  }
+
+  function renderLearnHome() {
+    stopTimer();
+    setChapterIndicator('教科書');
+    const chapterCards = Object.keys(CHAPTER_NAMES).map(ch => {
+      const topics = LESSONS.filter(l => l.chapter === parseInt(ch, 10));
+      return `
+        <button class="chapter-card" data-ch="${ch}">
+          <div class="chip">${ch}</div>
+          <div class="body">
+            <div class="title">${escapeHtml(CHAPTER_NAMES[ch])}</div>
+            <div class="meta">${topics.length} トピック</div>
+          </div>
+          <div class="arrow">›</div>
+        </button>
+      `;
+    }).join('');
+
+    render(`
+      <div class="breadcrumb">
+        <a id="crumb-home">ホーム</a>
+        <span class="sep">›</span>
+        <span>教科書</span>
+      </div>
+      <div class="page-title">
+        <h1>教科書で学ぶ</h1>
+        <p>章を選んで基礎から学ぶ · 問題を解く前の土台づくりに</p>
+      </div>
+      <section>
+        <div class="section-label">章を選択</div>
+        <div class="chapter-card-list">${chapterCards}</div>
+      </section>
+    `);
+
+    document.getElementById('crumb-home').addEventListener('click', renderHome);
+    app.querySelectorAll('.chapter-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        renderChapterLessons(parseInt(btn.dataset.ch, 10));
+      });
+    });
+  }
+
+  function renderChapterLessons(chapter) {
+    stopTimer();
+    setChapterIndicator(CHAPTER_NAMES[chapter]);
+    const topics = LESSONS.filter(l => l.chapter === chapter);
+    const topicHtml = topics.map((t, i) => `
+      <button class="topic-card" data-id="${t.id}">
+        <div class="num">${i + 1}</div>
+        <div class="body">
+          <div class="title">${escapeHtml(t.title)}</div>
+          <div class="summary">${escapeHtml(t.summary)}</div>
+        </div>
+      </button>
+    `).join('');
+
+    render(`
+      <div class="breadcrumb">
+        <a id="crumb-home">ホーム</a>
+        <span class="sep">›</span>
+        <a id="crumb-learn">教科書</a>
+        <span class="sep">›</span>
+        <span>${escapeHtml(CHAPTER_SHORT[chapter])}</span>
+      </div>
+      <div class="page-title">
+        <h1>${escapeHtml(CHAPTER_NAMES[chapter])}</h1>
+        <p>${topics.length} トピックを順番に学んでいきましょう</p>
+      </div>
+      <section>
+        <div class="section-label">トピック一覧</div>
+        <div class="topic-list">${topicHtml}</div>
+      </section>
+      <div class="btn-group" style="margin-top:28px;">
+        <button class="secondary" id="btn-back-learn">← 章一覧へ</button>
+        <button id="btn-quiz-ch">この章の問題を解く →</button>
+      </div>
+    `);
+
+    document.getElementById('crumb-home').addEventListener('click', renderHome);
+    document.getElementById('crumb-learn').addEventListener('click', renderLearnHome);
+    document.getElementById('btn-back-learn').addEventListener('click', renderLearnHome);
+    document.getElementById('btn-quiz-ch').addEventListener('click', () => {
+      startQuiz({ count: 10, chapter: String(chapter), mode: 'normal' });
+    });
+    app.querySelectorAll('.topic-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        renderLesson(btn.dataset.id);
+      });
+    });
+  }
+
+  function renderLesson(topicId) {
+    stopTimer();
+    const topic = LESSONS.find(l => l.id === topicId);
+    if (!topic) { renderLearnHome(); return; }
+    setChapterIndicator(CHAPTER_NAMES[topic.chapter]);
+
+    const idx = LESSONS.filter(l => l.chapter === topic.chapter).findIndex(l => l.id === topicId);
+    const chapterTopics = LESSONS.filter(l => l.chapter === topic.chapter);
+    const prev = idx > 0 ? chapterTopics[idx - 1] : null;
+    const next = idx < chapterTopics.length - 1 ? chapterTopics[idx + 1] : null;
+
+    const sectionsHtml = topic.sections.map(s => `
+      <div class="lesson-section">
+        <h2>${escapeHtml(s.heading)}</h2>
+        <p>${renderLessonBody(s.body)}</p>
+        ${s.code ? `<pre class="code-block">${escapeHtml(s.code)}</pre>` : ''}
+      </div>
+    `).join('');
+
+    const pointsHtml = topic.points && topic.points.length ? `
+      <div class="points-box">
+        <h3>🎯 要点</h3>
+        <ul>${topic.points.map(p => `<li>${escapeHtml(p)}</li>`).join('')}</ul>
+      </div>
+    ` : '';
+
+    const pitfallsHtml = topic.pitfalls && topic.pitfalls.length ? `
+      <div class="pitfalls-box">
+        <h3>⚠️ ひっかかりやすいポイント</h3>
+        <ul>${topic.pitfalls.map(p => `<li>${escapeHtml(p)}</li>`).join('')}</ul>
+      </div>
+    ` : '';
+
+    render(`
+      <div class="breadcrumb">
+        <a id="crumb-home">ホーム</a>
+        <span class="sep">›</span>
+        <a id="crumb-learn">教科書</a>
+        <span class="sep">›</span>
+        <a id="crumb-ch">${escapeHtml(CHAPTER_SHORT[topic.chapter])}</a>
+        <span class="sep">›</span>
+        <span>${idx + 1} / ${chapterTopics.length}</span>
+      </div>
+
+      <div class="lesson-header">
+        <h1>${escapeHtml(topic.title)}</h1>
+      </div>
+      <div class="lesson-summary">${escapeHtml(topic.summary)}</div>
+
+      ${sectionsHtml}
+      ${pointsHtml}
+      ${pitfallsHtml}
+
+      <div class="lesson-nav">
+        <div class="group">
+          ${prev ? `<button class="secondary" id="btn-prev">← 前</button>` : '<span></span>'}
+        </div>
+        <div class="group">
+          <button class="secondary" id="btn-ch-list">章の目次へ</button>
+          ${next
+            ? `<button id="btn-next-lesson">次のトピック →</button>`
+            : `<button id="btn-to-quiz">この章の問題を解く →</button>`}
+        </div>
+      </div>
+    `);
+
+    document.getElementById('crumb-home').addEventListener('click', renderHome);
+    document.getElementById('crumb-learn').addEventListener('click', renderLearnHome);
+    document.getElementById('crumb-ch').addEventListener('click', () => renderChapterLessons(topic.chapter));
+    document.getElementById('btn-ch-list').addEventListener('click', () => renderChapterLessons(topic.chapter));
+    if (prev) {
+      document.getElementById('btn-prev').addEventListener('click', () => renderLesson(prev.id));
+    }
+    if (next) {
+      document.getElementById('btn-next-lesson').addEventListener('click', () => renderLesson(next.id));
+    } else {
+      document.getElementById('btn-to-quiz').addEventListener('click', () => {
+        startQuiz({ count: 10, chapter: String(topic.chapter), mode: 'normal' });
+      });
+    }
   }
 
   function startQuiz({ count, chapter, mode }) {
